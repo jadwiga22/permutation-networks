@@ -1,0 +1,303 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{lmodern}
+\usepackage[a4paper]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{caption}
+
+
+% do uzupełnienia
+\newcommand{\todo}[1]{\begin{center} \fbox{TODO: #1} \end{center}}
+
+% wyłączenie wcięć
+\setlength\parindent{0pt}
+
+% matematyczne
+\renewcommand{\mod}{\,\, \text{mod} \,\,}
+\newcommand{\shift}[2]{\text{shift}_{#2}^{#1}}
+\newcommand{\sym}[2]{\text{sym}_{#2}^{#1}}
+\newcommand{\id}[1]{\text{id}_{#1}}
+\newcommand{\td}{\text{.}}
+\newcommand{\tc}{\text{,}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+
+% twierdzenia, lematy, definicje, fakty, wnioski
+\newtheorem{tw}{Twierdzenie}[section]
+\newtheorem{lem}[tw]{Lemat}
+\theoremstyle{definition}
+\newtheorem{df}[tw]{Definicja}
+\newtheorem{wn}[tw]{Wniosek}
+\newtheorem{fa}[tw]{Fakt}
+\newtheorem*{pyt}{Pytanie}
+
+\begin{document}
+
+% ---------- strona tytułowa -----------------
+
+\newpage
+\thispagestyle{empty}
+\begin{center}
+\textbf{\large Uniwersytet Wrocławski\\
+Wydział Matematyki i Informatyki\\
+Instytut Matematyczny}\\
+% \textit{\large specjalność: wpisz tu specjalność}\\
+\vspace{4cm}
+\textbf{\textit{\large Maksymilian Adamczewski i Jadwiga Świerczyńska}\\
+\vspace{0.5cm}
+{\Large Sieci przełączników}}\\
+\end{center}
+\vspace{3cm}
+{\large \hspace*{6.5cm}Praca zespołowa\\
+\hspace*{6.5cm}napisana pod opieką\\
+\hspace*{6.5cm}dr. hab. Jana Dymary, prof. UWr }\\
+\vfill
+\begin{center}
+{\large Wrocław, 2023 r.}\\
+\end{center}
+
+% -------------- abstrakt ----------------------
+
+\newpage
+
+\null\vfill
+
+\begin{abstract}
+    \todo{streszczenie}
+    % Sieci przełączników bla bla bla
+\end{abstract}
+
+\vfill
+
+
+% -------------- spis treści --------------------
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+
+% -------------- wprowadzenie --------------------
+
+\section{Wprowadzenie}
+
+Sieci przełączników to struktury, które można zinterpretować jako urządzenia zbudowane z tzw. \textit{przełączników} pozwalające na permutowanie \(n\) rozróżnialnych sygnałów danych na wejściu. Naturalne jest, że dążymy do optymalizacji struktury sieci pod względem liczby użytych przełączników lub maksymalnej liczby przełączników, przez jakie przepływa sygnał w sieci. Jednakże ze względu na wysoce wyspecjalizowane zastosowania (m. in. sieci telefoniczne, trasowanie pakietów) brakuje źródeł wyczerpująco tłumaczących to zagadnienie w sposób przystępny na przykład dla studenta drugiego roku informatyki. W tej pracy przybliżymy podstawowe definicje (rozdział 2), przedstawimy konstrukcję najsłynniejszej sieci realizującej wszystkie permutacje, czyli sieci Beneša--Waksmana (rozdział 3), sieci realizującej wszystkie przesunięcia cykliczne (rozdział 4) i sieci realizującej przesunięcia cykliczne o potęgi 2 (rozdział 5).  Natomiast w rozdziale 6 przeanalizujemy sieci, w których przełączniki są ustawiane losowo w jeden z dwóch stanów. 
+
+\hspace{1em}
+
+Zastrzegamy jednak, że za względu na cel pracy, polegający na przystępnym przybliżeniu tematu, przy formułowaniu definicji i konstrukcji będziemy skupiać się na intuicji. Precyzyjną matematyczną formalizację pozostawimy jako ćwiczenie dla Czytelnika, które okaże się schematycznym zadaniem, gdy już się zrozumie idee stojące za sieciami przęłączników. 
+
+\hspace{1em}
+
+Przez \(S_n\) będziemy oznaczać zbiór wszystkich permutacji \(\{0, 1, \ldots, n-1\}\), przez
+\[
+\shift{n}{k} : \{0, 1, \ldots, n-1\} \to \{0, 1, \ldots, n-1\} 
+\]
+permutację \(\shift{n}{k}(i) = (k+i) \mod n\), a przez
+\[
+\sym{n}{k} : \{0, 1, \ldots, n-1\} \to \{0, 1, \ldots, n-1\} 
+\]
+permutację \(\sym{n}{k}(i) = (k-i) \mod n\), natomiast przez 
+\[
+\id{n} : \{0, 1, \ldots, n-1\} \to \{0, 1, \ldots, n-1\} 
+\]
+permutację identycznościową. 
+
+
+% -------- podstawowe definicje i fakty -----------
+
+\section{Podstawy}
+
+\subsection{Definicje}
+
+Zacznijmy od najistotniejszej dla tej pracy kwestii -- czyli definicji przełącznika.
+
+\hspace{.5em}
+
+{\bf Przełącznikiem} nazywamy urządzenie mające dwa wejścia (oznaczone liczbami 0 i 1)  i dwa wyjścia (oznaczone liczbami 0 i 1). Może się znaleźć w dwóch stanach:
+
+\begin{itemize}
+    \item nieaktywnym -- sygnał z wejścia \(i\) trafia do wyjścia \(i\) (dla \(i \in \{0,1\}\)),
+    \item  aktywnym -- sygnał z wejścia \(i\) trafia do wyjścia \((i+1) \mod 2\) (dla \(i \in \{0,1\}\)).
+\end{itemize}
+
+\todo{rysunek przełącznika w dwóch stanach}
+
+Przełączniki w naturalny sposób możemy ze sobą łączyć {\bf przewodami} -- sygnał z wyjścia jednego przełącznika może zostać przekierowany przewodem na wejście innego przełącznika. 
+
+\hspace{1em}
+
+Połączone przewodniki tworzą {\bf sieć przełączników}. Dokładniej, siecią przełączników o \(n\) wejściach i \(n\) wyjściach nazywamy zbiór przełączników i przewodów, w którym:
+
+\begin{itemize}
+    \item z każdego wyjścia przełącznika w sieci wychodzi dokładnie jeden przewód,
+    \item do każdego wejścia przełącznika w sieci wchodzi dokładnie jeden przewód,
+    \item z każdego wejścia sieci wychodzi dokładnie jeden przewód,
+    \item  do każdego wyjścia sieci wchodzi dokładnie jeden przewód, 
+    \item żaden przewód nie jest podłączony dwoma końcami do tego samego przełącznika,
+    \item wejście każdego przewodu jest wpięte do wyjścia pewnego przełącznika lub do wejścia sieci,
+    \item wyjście każdego przewodu jest wpięte do wejścia pewnego przełącznika lub do wyjścia sieci.
+\end{itemize}
+
+Ponadto wejścia i wyjścia sieci numerujemy liczbami od \(0\) do \(n-1\).
+
+\todo{przykłady sieci}
+
+\todo{antyprzykłady sieci}
+
+\begin{df}
+    Mówimy, że sieć przełączników o \(n\) wejściach i \(n\) wyjściach realizuje permutację \(\sigma \in S_n\), gdy każdemu przewodnikowi możemy nadać stan (aktywny lub nieaktywny) tak, by dla sygnałów w kolejności \(0, 1, \ldots, n-1\) na wejściu otrzymać sygnały w kolejności \(\sigma (0), \sigma (1), \ldots, \sigma (n-1)\) na wyjściu. 
+\end{df}
+
+\todo{sieć realizująca jakąś małą permutację}
+
+\todo{sieć, która nie może zrealizować jakiejś permutacji}
+
+\begin{df}
+    Rozmiar sieci to liczba przełączników w sieci.
+\end{df}
+
+\begin{df}
+    Głębokość sieci to maksymalna liczba przełączników, przez które przechodzi sygnał od wejścia do wyjścia sieci.  
+\end{df}
+
+\todo{sieć o rozmiarze x i głębokości y}
+
+\subsection{Najprostsze sieci}
+
+\begin{pyt}
+    Czy istnieje sieć o 6 wejściach i 6 wyjściach mająca rozmiar równy 9, która realizuje wszystkie permutacje z \(S_6\)?
+\end{pyt}
+
+Odpowiedź to nie -- łatwo zauważyć, że każdy przełącznik zwiększa liczbę permutacji realizowanych przez sieć co najwyżej dwukrotnie. Wobec tego taka sieć realizuje co najwyżej \(2^9 = 512\) permutacji. Zarazem \(6! = 720 > 512\),  czyli taka sieć nie może istnieć. 
+
+\hspace{1em}
+
+Jakie sieci zatem istnieją? W poniższych rozważaniach pochylimy się nad sieciami głębokości co najwyżej 2 realizującymi identyczność i pewną inną permutację. Konstrukcje tych sieci przeprowadzamy tak, jak autorzy pracy \cite{klo}. Będą one pomocne przy tworzeniu sieci realizującej przesunięcia cykliczne o potęgi 2. 
+
+\begin{lem}\label{lem:perm_symetrie}
+    Dla dowolnego \(n\) oraz \(k \in \{0, 1, \ldots, n-1\}\) istnieje sieć \(n\) wejściach i \(n\) wyjściach o głębokości 1 realizująca i rozmiarze co najwyżej \(\floor{\frac n 2}\) realizująca \(\id{n}\) i \(\sym{n}{k}\).
+\end{lem}
+
+\begin{proof}
+    Ustalmy \(n\) oraz \(k \in \{0, 1, \ldots, n-1\}\). Zauważmy, że 
+    \[
+    \sym{n}{k} \circ \sym{n}{k} = \id{n} \td
+    \]
+    Wobec tego permutacja \(\sym n k\) jest inwolucją, a co za tym idzie -- składa się z cykli o rozmiarze co najwyżej 2. Konstrukcja sieci wygląda następująco:
+    \begin{itemize}
+        \item każdemu cyklowi postaci \((i,j)\) przypisujemy przełącznik, który na wejściach przyjmuje sygnały \(i\) oraz \(j\) z wejścia sieci, a przewody na jego wyjściach prowadzą do wyjść sieci o numerach \(i\) oraz \(j\),
+        \item każdemu cyklowi jednoelementowemu postaci \((i)\) przypisujemy przewód biegnący od \(i\)--tego wejścia do \(i\)--tego wyjścia sieci.
+    \end{itemize}
+    Oczywiście w ten sposób używamy co najwyżej \(\floor{\frac{n}{2}}\) przełączników. 
+    Ponadto jeśli wszystkie przełączniki są w stanie nieaktywnym, sieć realizuje \(\id n\), natomiast jeśli wszystkie są w stanie aktywnym, to realizuje \(\sym n k\).
+\end{proof}
+
+Zaobserwujmy konstrukcję z lematu \ref{lem:perm_symetrie} dla \(n=4\) i \(k=2\).
+
+\todo{rysunek sieci}
+
+\begin{lem}\label{lem:perm_shifty}
+     Dla dowolnego \(n\) oraz \(k \in \{0, 1, \ldots, n-1\}\) istnieje sieć o \(n\) wejściach i \(n\) wyjściach o głębokości 2 realizująca \(\id n\) i \(\shift{n}{k}\).
+\end{lem}
+
+\begin{proof}
+    Ustalmy \(n\). Zauważmy, że
+    \[
+    \sym n k (\sym n 0 (i)) = \sym n k (-i \mod n) = (k - (-i)) \mod n = (k + i) \mod n  = \shift n k (i)
+    \]
+    dla każdego \(i \in \{0, 1, \ldots, n-1\}\). Wobec tego \(\shift n k = \sym n k \circ \sym n 0\). Stwórzmy zatem sieć przełączników o dwóch warstwach -- pierwsza z nich niech będzie siecią realizującą \(\id n\) i \(\sym n 0\), a druga siecią realizującą \(\id n\) i  \(\sym n k\) (jak w lemacie \ref{lem:perm_symetrie}). Taka sieć ma głębokość 2. Jeśli wszystkie przełączniki są nieaktywne, to realizuje \(\id n\), natomiast jeśli wszystkie są aktywne, to z powyższego rachunku wynika, że realizuje \(\shift n k\).
+\end{proof}
+
+\todo{przykład konstrukcji}
+
+\begin{lem}
+    Dla dowolnego \(n\) oraz \(\sigma \in S_n\) istnieje sieć o  \(n\) wejściach i \(n\) wyjściach o głębokości 2 realizująca \(\id n\) i \(\sigma\).
+\end{lem}
+
+\begin{proof}
+    Ustalmy \(n\) oraz \(\sigma \in S_n\). Oczywiście \(\sigma\) może być przedstawiona jako złożenie cykli rozłącznych:
+    \[
+        \sigma = \sigma_1 \circ \sigma_2 \circ \ldots \circ \sigma_k \td
+    \]
+    Bez straty ogólności możemy myśleć, że \(\sigma_i\) działa na zbiorze \(\{0, 1, \ldots, l_i -1\}\) jako \(\shift {l_i} 1\). Z lematu \ref{lem:perm_shifty} wiemy, że istnieje sieć głębokości 2 realizująca \(\id {l_i}\) oraz \(\shift {l_i} 1\). Wobec tego istnieje sieć o głębokości 2, która realizuje \(\id n\) oraz \(\sigma_i\), a konstrukcja sieci żądanej w tym lemacie polega na złożeniu sieci dla każdego \(\sigma_i\). Z rozłączności cykli wynika, że ta sieć będzie miała głębokość równą 2. Jej poprawność wynika oczywiście z lematu \ref{lem:perm_shifty}.
+\end{proof}
+
+
+
+% ---------- sieć Beneša-Waksmana -----------------
+
+\section{Sieć Beneša--Waksmana}
+
+\begin{pyt}
+    Czy istnieje sięć realizująca wszyskie permutacje z \(S_n\)?
+\end{pyt}
+Odpowiedź to tak.
+\todo{Przykład jak konstruować nie optymalnie sieci permutacji}
+\begin{pyt}
+    Jaka jest minimalna liczba przełączników żeby zrealizować wszystkie permutacje z \(S_n\)?
+\end{pyt}
+\begin{tw}
+    Żeby zrealizować każdą permutację z \(S_n\) potrzeba sieci o co najmniej \(O(n \log n )\) przełącznikach.
+\end{tw}
+\begin{proof}
+Ustalmy n $\in \mathbb{N}$.
+Zauważmy, że przełącznik, co najwyżej, zwiększa ilość realizowanych permutacji dwukrotnie.
+Niech $\sigma$ będzie siecią która realizuje wszystkie \(n!\) permutacji. Niech \(F\) będzie funkcją która sieci przyporządkowuje ilość przełączników która się w niej znajduje.
+Wtedy $log(n!) \leq F(\sigma)$. Ze wzoru Stirlinga z możemy oszacować \(n!\) z dołu przez $(n/e)^n$. Wówczas
+\[
+    \log (n!) \geq \log ( (n/e)^n ) = n(\log n - \log e) = O(n \log n)
+\]
+\end{proof}
+\begin{pyt}
+    Jak skonstruować taką sieć?
+\end{pyt}
+Dla uproszczenia przyjmiemy, że \(n = 2^k\) dla pewnego \(k \in \mathbb{N}\).
+Konstrukcja polega na podzieleniu problemu na dwa identyczne pod problemy i pomysłowym połączeniu tych dwóch pod problemów w pełne rozwiązanie.
+Na wejściu mamy \(n\) przełączników z każdego ich wyjścia prowadzimy przewód do wejść obu pod sieci o rozmiarze \(n/2\).
+Podobnie na wyjściu mamy \(n\) przełączników i z każdego ich wejścia prowadzimy przewód do wyjść obu podsieci o rozmiarze \(n/2\).
+\todo{Konstrukcja sieci Beneša--Waksmana}
+\begin{tw}
+    Sieć Beneša--Waksmana realizuje wszystkie permutacje.
+\end{tw}
+\begin{proof}
+    
+\end{proof}
+\todo{Przykład małej sieci}
+
+\begin{pyt}
+    Czy da się lepiej?
+\end{pyt}
+Tak. Można usunąć po jednym przełączniku w każdej warstwie.
+\begin{proof}
+    
+\end{proof}
+
+% --- Sieć realizująca wszystkie przesunięcia cykliczne ---
+
+\section{Sieć realizująca wszystkie przesunięcia cykliczne}
+
+% -- Sieć realizująca przesunięcia cykliczne o potęgi 2 ---
+
+\section{Sieć realizująca przesunięcia cykliczne o potęgi 2}
+
+% ------------------ Co dalej? -------------------
+
+\section{Co dalej?}
+
+Losowe ustawianie przełączników -- analiza probabilistyczna. 
+
+% ------------- bibliografia ----------------------
+
+\begin{thebibliography}{9}
+\bibitem{klo}
+Juraj Hromkovič, Przemyslawa Kanarek, Ralf Klasing, Krzysztof Lorys, Walter Unger, et al.. \emph{On the Size of Permutation Networks and Consequences for Efficient Simulation of Hypercube Algorithms on Bounded-Degree Networks}. SIAM Journal on Discrete Mathematics, 2009, 23 (3), pp.1612–1645. ff10.1137/060669164ff. ffhal-00402764f
+\end{thebibliography}
+
+\end{document}
