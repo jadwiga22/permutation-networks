@@ -8,7 +8,7 @@ Praca wykonywana w ramach Zespołowego Projektu Specjalnościowego w Instytucie 
 Przystępne wprowadzenie w temat sieci przełączników zawierające:
 
 - podstawowe definicje,
-- konstrukcję sieci realizujących permutację identycznościową i $\sigma$ dla dowolnego $\sigma$,
+- konstrukcje sieci realizujących permutację identycznościową i $\sigma$ dla dowolnego $\sigma$,
 - konstrukcję sieci Benesa-Waksmana (wraz z dowodem poprawności, głębokością, rozmiarem, ulepszeniem),
 - konstrukcję sieci realizującej wszystkie przesunięcia cykliczne,
 - konstrukcję sieci realizującej przesunięcia cykliczne o potęgi 2.
