@@ -9,6 +9,7 @@
 \usepackage{hyperref}
 \usepackage{array}
 \usepackage{caption}
+\usepackage{tikz}
 
 
 % do uzupełnienia
@@ -23,8 +24,10 @@
 \newcommand{\sym}[2]{\text{sym}_{#2}^{#1}}
 \newcommand{\id}[1]{\text{id}_{#1}}
 \newcommand{\td}{\text{.}}
-\newcommand{\tc}{\text{,}}
+\newcommand{\tc}{\text{, }}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\twoshift}[1]{\text{TwoShift}_{#1}}
+\newcommand{\N}{\mathbb{N}}
 
 % twierdzenia, lematy, definicje, fakty, wnioski
 \newtheorem{tw}{Twierdzenie}[section]
@@ -89,11 +92,11 @@ Instytut Matematyczny}\\
 
 Sieci przełączników to struktury, które można zinterpretować jako urządzenia zbudowane z tzw. \textit{przełączników} pozwalające na permutowanie \(n\) rozróżnialnych sygnałów danych na wejściu. Naturalne jest, że dążymy do optymalizacji struktury sieci pod względem liczby użytych przełączników lub maksymalnej liczby przełączników, przez jakie przepływa sygnał w sieci. Jednakże ze względu na wysoce wyspecjalizowane zastosowania (m. in. sieci telefoniczne, trasowanie pakietów) brakuje źródeł wyczerpująco tłumaczących to zagadnienie w sposób przystępny na przykład dla studenta drugiego roku informatyki. W tej pracy przybliżymy podstawowe definicje (rozdział 2), przedstawimy konstrukcję najsłynniejszej sieci realizującej wszystkie permutacje, czyli sieci Beneša--Waksmana (rozdział 3), sieci realizującej wszystkie przesunięcia cykliczne (rozdział 4) i sieci realizującej przesunięcia cykliczne o potęgi 2 (rozdział 5).  Natomiast w rozdziale 6 przeanalizujemy sieci, w których przełączniki są ustawiane losowo w jeden z dwóch stanów. 
 
-\hspace{1em}
+\vspace{1em}
 
 Zastrzegamy jednak, że za względu na cel pracy, polegający na przystępnym przybliżeniu tematu, przy formułowaniu definicji i konstrukcji będziemy skupiać się na intuicji. Precyzyjną matematyczną formalizację pozostawimy jako ćwiczenie dla Czytelnika, które okaże się schematycznym zadaniem, gdy już się zrozumie idee stojące za sieciami przęłączników. 
 
-\hspace{1em}
+\vspace{1em}
 
 Przez \(S_n\) będziemy oznaczać zbiór wszystkich permutacji \(\{0, 1, \ldots, n-1\}\), przez
 \[
@@ -118,7 +121,7 @@ permutację identycznościową.
 
 Zacznijmy od najistotniejszej dla tej pracy kwestii -- czyli definicji przełącznika.
 
-\hspace{.5em}
+\vspace{1em}
 
 {\bf Przełącznikiem} nazywamy urządzenie mające dwa wejścia (oznaczone liczbami 0 i 1)  i dwa wyjścia (oznaczone liczbami 0 i 1). Może się znaleźć w dwóch stanach:
 
@@ -131,7 +134,7 @@ Zacznijmy od najistotniejszej dla tej pracy kwestii -- czyli definicji przełąc
 
 Przełączniki w naturalny sposób możemy ze sobą łączyć {\bf przewodami} -- sygnał z wyjścia jednego przełącznika może zostać przekierowany przewodem na wejście innego przełącznika. 
 
-\hspace{1em}
+\vspace{1em}
 
 Połączone przewodniki tworzą {\bf sieć przełączników}. Dokładniej, siecią przełączników o \(n\) wejściach i \(n\) wyjściach nazywamy zbiór przełączników i przewodów, w którym:
 
@@ -177,7 +180,7 @@ Ponadto wejścia i wyjścia sieci numerujemy liczbami od \(0\) do \(n-1\).
 
 Odpowiedź to nie -- łatwo zauważyć, że każdy przełącznik zwiększa liczbę permutacji realizowanych przez sieć co najwyżej dwukrotnie. Wobec tego taka sieć realizuje co najwyżej \(2^9 = 512\) permutacji. Zarazem \(6! = 720 > 512\),  czyli taka sieć nie może istnieć. 
 
-\hspace{1em}
+\vspace{1em}
 
 Jakie sieci zatem istnieją? W poniższych rozważaniach pochylimy się nad sieciami głębokości co najwyżej 2 realizującymi identyczność i pewną inną permutację. Konstrukcje tych sieci przeprowadzamy tak, jak autorzy pracy \cite{klo}. Będą one pomocne przy tworzeniu sieci realizującej przesunięcia cykliczne o potęgi 2. 
 
@@ -226,7 +229,7 @@ Zaobserwujmy konstrukcję z lematu \ref{lem:perm_symetrie} dla \(n=4\) i \(k=2\)
     \[
         \sigma = \sigma_1 \circ \sigma_2 \circ \ldots \circ \sigma_k \td
     \]
-    Bez straty ogólności możemy myśleć, że \(\sigma_i\) działa na zbiorze \(\{0, 1, \ldots, l_i -1\}\) jako \(\shift {l_i} 1\). Z lematu \ref{lem:perm_shifty} wiemy, że istnieje sieć głębokości 2 realizująca \(\id {l_i}\) oraz \(\shift {l_i} 1\). Wobec tego istnieje sieć o głębokości 2, która realizuje \(\id n\) oraz \(\sigma_i\), a konstrukcja sieci żądanej w tym lemacie polega na złożeniu sieci dla każdego \(\sigma_i\). Z rozłączności cykli wynika, że ta sieć będzie miała głębokość równą 2. Jej poprawność wynika oczywiście z lematu \ref{lem:perm_shifty}.
+    Prostą konsekwencją lematu \ref{lem:perm_shifty} jest to, że istnieje sieć o głębokości 2, która realizuje \(\id n\) oraz \(\sigma_i\) dla każdego \(i\). Konstrukcja sieci żądanej w tym lemacie polega na złożeniu tych sieci dla każdego \(\sigma_i\). Z rozłączności cykli wynika, że będzie miała ona głębokość równą 2. 
 \end{proof}
 
 
@@ -286,6 +289,262 @@ Tak. Można usunąć po jednym przełączniku w każdej warstwie.
 % -- Sieć realizująca przesunięcia cykliczne o potęgi 2 ---
 
 \section{Sieć realizująca przesunięcia cykliczne o potęgi 2}
+
+W tym rozdziale chcemy zastanowić się nad konstrukcją sieci o \(n\) wejściach i \(n\) wyjściach realizującej przesunięcia cykliczne o potęgi 2 nie większe niż \(n\), to znaczy chcemy zrealizować zbiór
+
+\[
+\twoshift{n} = \{ \id n \tc \shift n {2^0} \tc \shift n {2^1} \tc \ldots \shift n {2^l}\} \tc
+\]
+
+gdzie \(2^l \leq n\) oraz \(2^{l+1} > n\). Dla uproszczenia przyjmiemy, że \(n = 2^{2^r}\) dla pewnego \(r \in \N\) i oznaczymy \( m = \sqrt{n} = 2^{2^{r-1}} \). Uogólnienie konstrukcji dla dowolnego \(n \in \N\) zostało przedstawione w \cite{klo}.
+
+\vspace{1em}
+
+W tym rozdziale będziemy wyobrażać sobie zbiór \(\{0, 1, 2, \ldots, n-1\}\) jako macierz o wymiarach \(m \times m\) -- to uzasadnia wybór \(n\), które jest kwadratem liczby naturalnej. Na przykład dla \(r = 2\) mamy \(n = 2^{2^2} = 2^4 = 16\), a macierzowa reprezentacja zbioru wygląda następująco:
+\[
+\begin{matrix}
+ 0 &  1 &  2 &  3 \\
+ 4 &  5 &  6 &  7 \\
+ 8 &  9 & 10 & 11 \\
+12 & 13 & 14 & 15
+\end{matrix}
+\]
+
+Zastanówmy się teraz, jak wyglądają przesunięcia cykliczne o \(2^k\) w tej reprezentacji. Gdy \(2^k\) jest \textit{duże}, to znaczy \(2^k \geq m\) (równoważnie \(k \geq 2^{r-1}\)), to \(m \, | \, 2^k\). Wobec tego \(\shift n {2^k}\) jest przesunięciem cyklicznym o \(2^k / m = 2^k / 2^{2^{r-1}} = 2^{k - 2^{r-1}}\) na zbiorze wierszy. Na przykład dla \(n = 64 = 2^{2^3}\) oraz \(2^k = 2^4 = 2 \cdot \sqrt{64}\) mamy
+
+\vspace{0.5em}
+
+\begin{minipage}{.5\textwidth} %
+
+\[
+\begin{matrix}
+ 0 &  1 &  2 &  \ldots & 7 \\
+ 8 &  9 & 10 &  \ldots & 15 \\
+\ldots & & \ddots &  & \vdots \\
+48 & 49 & 50 & \ldots & 55 \\
+56 & 57 & 58 & \ldots & 63 
+\end{matrix}
+\]
+
+\begin{center} \it
+    Zbiór przed wykonaniem \(\shift {64} {16}\).
+\end{center}
+
+\end{minipage} %
+\begin{minipage}{.5\textwidth} %
+
+\[
+\begin{matrix}
+16 & 17 & 18 & \ldots & 23 \\
+24 & 25 & 26 & \ldots & 31 \\
+\ldots & & \ddots &  & \vdots \\
+56 & 57 & 58 & \ldots & 63 \\
+0 &  1 &  2 &  \ldots & 7 \\
+8 &  9 & 10 &  \ldots & 15 \\
+\end{matrix}
+\]
+
+\begin{center} \it
+    Zbiór po wykonaniu \(\shift {64} {16}\).
+\end{center}
+\end{minipage}
+
+\vspace{1em}
+
+Możemy także pomyśleć o tym nieco inaczej. Dokładniej, \(\shift n {2^k}\) może być wykonany w 3 etapach:
+
+\begin{enumerate}
+    \item transpozycja macierzy,
+    \item \(\shift {m} {2^k/m}\) na wierszach tak otrzymanej macierzy,
+    \item transpozycja macierzy.
+\end{enumerate}
+
+Przeanalizujmy to na powyższym przykładzie -- \(n = 64\) oraz \(2^k = 16\).
+
+\vspace{0.5em}
+
+\begin{minipage}{.5\textwidth} %
+
+\[
+\begin{matrix}
+ 0 &  1 &  2 &  \ldots & 7 \\
+ 8 &  9 & 10 &  \ldots & 15 \\
+\ldots & & \ddots &  & \vdots \\
+48 & 49 & 50 & \ldots & 55 \\
+56 & 57 & 58 & \ldots & 63 
+\end{matrix}
+\]
+
+\begin{center} \it
+    Początkowy zbiór.
+\end{center}
+
+\end{minipage} %
+\begin{minipage}{.5\textwidth} %
+
+\[
+\begin{matrix}
+ 0 &  8 &  16 &  \ldots & 56 \\
+ 1 &  9 &  17 &  \ldots & 57 \\
+\ldots  & & \ddots &     & \vdots \\
+ 6 & 14 & 22 & \ldots   & 62 \\
+ 7 & 15 & 23 & \ldots   & 63 
+\end{matrix}
+\]
+
+\begin{center} \it
+    Zbiór po wykonaniu transpozycji.
+\end{center}
+\end{minipage}
+
+\vspace{0.5em}
+
+\begin{minipage}{.5\textwidth} %
+\[
+\begin{matrix}
+ 16 &  24 &  \ldots & 0 & 8 \\
+ 17 &  25 &  \ldots & 1 & 9 \\
+\ldots  & &  \ddots &   & \vdots \\
+ 22 &  30 &  \ldots & 6 & 14 \\
+ 23 &  31 &  \ldots & 7 & 15
+\end{matrix}
+\]
+
+\begin{center} \it
+    Zbiór po wykonaniu \(\shift{8}{2}\) na wierszach macierzy.
+\end{center}
+
+\end{minipage} %
+\begin{minipage}{.5\textwidth} %
+
+\[
+\begin{matrix}
+ 16 &  17 &  \ldots & 22 & 23 \\
+ 24 &  25 &  \ldots & 30 & 31 \\
+\ldots  & &  \ddots &    & \vdots \\
+  0 &   1 &  \ldots &  6 & 7 \\
+  8 &   9 &  \ldots &  14 & 15
+\end{matrix}
+\]
+
+\begin{center} \it
+    Zbiór po wykonaniu transpozycji.
+\end{center}
+\end{minipage}
+
+Co się dzieje, gdy \(2^k\) jest \textit{małe} (to znaczy \(2^k < m \))? Wtedy zmiany w układzie liczb zachodzą także wewnątrz wierszy. Istotnie -- \(\shift n {2^k}\) możemy wówczas przedstawić jako dwa etapy:
+\begin{enumerate}
+    \item \(\shift{m}{2^k}\) wewnątrz każdego wiersza,
+    \item \(\shift{m}{1}\) wewnątrz ostatnich \(2^k\) kolumn.
+\end{enumerate}
+
+Przyjrzyjmy się tym etapom na przykładzie -- niech \(n=64\) oraz \(2^k = 2\).
+
+\vspace{0.5em}
+
+\begin{minipage}{.5\textwidth} %
+
+\[
+\begin{matrix}
+ 0 &  1 &  2 &  \ldots & 7 \\
+ 8 &  9 & 10 &  \ldots & 15 \\
+\ldots & & \ddots &  & \vdots \\
+48 & 49 & 50 & \ldots & 55 \\
+56 & 57 & 58 & \ldots & 63 
+\end{matrix}
+\]
+
+\begin{center} \it
+    Początkowy zbiór.
+\end{center}
+
+\end{minipage} %
+\begin{minipage}{.5\textwidth} %
+
+\[
+\begin{matrix}
+ 2  &  3 & \ldots &  0 &  1 \\
+ 10 & 11 & \ldots &  8 &  9 \\
+\ldots & & \ddots &  & \vdots \\
+ 50 & 51 & \ldots & 48 & 49 \\
+ 58 & 59 & \ldots & 56 & 57 \\ 
+\end{matrix}
+\]
+
+\begin{center} \it
+    Zbiór po wykonaniu \(\shift 8 2\) na każdym wierszu.
+\end{center}
+\end{minipage}
+
+\vspace{1em}
+
+\begin{minipage}{.5\textwidth} %
+
+\[
+\begin{array}{c c  c c}
+ 2  &  3 & \ldots & 7 \\
+ 10 & 11 & \ldots & 15 \\
+\ldots & & \ddots &  \vdots \\
+ 50 & 51 & \ldots & 56  \\
+ 58 & 59 & \ldots & 63  \\ 
+\end{array}
+\begin{array}{| c c |}
+\hline
+ 0 &  1 \\
+ 8 &  9 \\
+\ldots & \ddots \\
+ 48 & 49 \\
+ 56 & 57 \\
+ \hline
+\end{array}
+\]
+
+\begin{center} \it
+    Kolumny, na których należy wykonać \(\shift 8 1\).
+\end{center}
+\end{minipage}
+\begin{minipage}{.5\textwidth} %
+
+\[
+\begin{matrix}
+ 2  &  3 & \ldots & 8  &  9  \\
+ 10 & 11 & \ldots & 16 & 17\\
+\ldots & & \ddots &  & \vdots \\
+ 50 & 51 & \ldots & 56 & 57 \\
+ 58 & 59 & \ldots & 0 &  1 \\ 
+\end{matrix}
+\]
+
+\begin{center} \it
+    Zbiór po wykonaniu \(\shift 8 1\) na 2 ostatnich kolumnach.
+\end{center}
+\end{minipage}
+
+\vspace{1em}
+
+Podsumowując, przesunięcia cykliczne o \(2^k\) realizujemy w następujący sposób:
+
+\begin{itemize}
+    \item gdy \(2^k\) jest małe, wykonujemy \(\shift{m}{2^k}\) wewnątrz każdego wiersza, a następnie \(\shift{m}{1}\) wewnątrz ostatnich \(2^k\) kolumn,
+    \item gdy \(2^k\) jest duże, transponujemy macierz, wykonujemy \(\shift {m} {2^k/m} \) na wierszach i znowu transponujemy macierz.
+\end{itemize}
+
+To pozwala już sformułować przybliżoną konstrukcję sieci. Aby skonstruować \(P_n\) -- sieć realizującą \(\twoshift n\), potrzebujemy następujących podsieci (zwanych dalej \textit{blokami}):
+
+\begin{itemize}
+    \item sieci realizującej transpozycję i \(\id n\) (oznaczmy ją \(T_1\)),
+    \item \(m\) sieci realizujących \( \twoshift m\) -- czyli \(m\) kopii sieci \(P_m\) (nazwijmy je \textit{blokiem wierszowym}),
+    \item \(m\) sieci realizujących \(\shift m 1\) oraz \(\id m\) dla każdej kolumny -- oznaczmy je \(K_0, K_1, \ldots, K_{m-1}\) i nazwijmy je \textit{blokiem kolumnowym}
+    \item oraz drugiej sieci realizującej transpozycję i \(\id n\) (oznaczmy ją \(T_2\)).
+\end{itemize}
+
+W terminach tak skonstruowanej sieci zrealizowanie przesunięcia cyklicznego o \(2^k\) wygląda następująco:
+
+\begin{itemize}
+    \item gdy \(2^k\) jest małe, aktywujemy blok wierszowy, tak by wykonał \(\shift m {2^k}\) na każdym wierszu, a następnie aktywujemy blok kolumnowy, tak by wykonał \(\shift m 1\) na ostatnich \(2^k\) kolumnach,
+    \item gdy \(2^k\) jest duże, aktywujemy sieć \(T_1\), tak by wykonała transpozycję, aktywujemy blok wierszowy, tak by wykonał \(\shift m {2^k/m}\) na każdym wierszu, a na końcu aktywujemy aktywujemy sieć \(T_2\), tak by wykonała transpozycję.
+\end{itemize}
+
 
 % ------------------ Co dalej? -------------------
 
