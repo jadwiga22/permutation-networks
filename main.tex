@@ -28,6 +28,9 @@
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\twoshift}[1]{\text{TwoShift}_{#1}}
 \newcommand{\N}{\mathbb{N}}
+\newcommand{\lt}{\left}
+\newcommand{\rt}{\right}
+\newcommand{\R}{\mathbb{R}}
 
 % twierdzenia, lematy, definicje, fakty, wnioski
 \newtheorem{tw}{Twierdzenie}[section]
@@ -112,6 +115,8 @@ permutację \(\sym{n}{k}(i) = (k-i) \mod n\), natomiast przez
 \]
 permutację identycznościową. 
 
+\todo{definicje notacji asymptotycznej}
+
 
 % -------- podstawowe definicje i fakty -----------
 
@@ -185,7 +190,7 @@ Odpowiedź to nie -- łatwo zauważyć, że każdy przełącznik zwiększa liczb
 Jakie sieci zatem istnieją? W poniższych rozważaniach pochylimy się nad sieciami głębokości co najwyżej 2 realizującymi identyczność i pewną inną permutację. Konstrukcje tych sieci przeprowadzamy tak, jak autorzy pracy \cite{klo}. Będą one pomocne przy tworzeniu sieci realizującej przesunięcia cykliczne o potęgi 2. 
 
 \begin{lem}\label{lem:perm_symetrie}
-    Dla dowolnego \(n\) oraz \(k \in \{0, 1, \ldots, n-1\}\) istnieje sieć \(n\) wejściach i \(n\) wyjściach o głębokości 1 realizująca i rozmiarze co najwyżej \(\floor{\frac n 2}\) realizująca \(\id{n}\) i \(\sym{n}{k}\).
+    Dla dowolnego \(n\) oraz \(k \in \{0, 1, \ldots, n-1\}\) istnieje sieć o \(n\) wejściach i \(n\) wyjściach o głębokości 1 i rozmiarze co najwyżej \(\floor{\frac n 2}\) realizująca \(\id{n}\) i \(\sym{n}{k}\).
 \end{lem}
 
 \begin{proof}
@@ -205,6 +210,16 @@ Jakie sieci zatem istnieją? W poniższych rozważaniach pochylimy się nad siec
 Zaobserwujmy konstrukcję z lematu \ref{lem:perm_symetrie} dla \(n=4\) i \(k=2\).
 
 \todo{rysunek sieci}
+
+Lemat \ref{lem:perm_symetrie} można jednak uogólnić -- zauważmy, że nie korzystamy z żadnych własności symetrii, poza tym, że \( \sym n k \circ \sym n k = \id n \).
+
+\begin{lem}\label{lem:perm_inwolucje}
+    Dla dowolnego \(n\) oraz \(\sigma \in S_n\), które jest inwolucją (to znaczy \(\sigma \circ \sigma = \id n\)) istnieje sieć o \(n\) wejściach i \(n\) wyjściach o głębokości 1 i rozmiarze co najwyżej \(\floor{\frac{n}{2}}\) realizująca \(\id n\) oraz \(\sigma\).
+\end{lem}
+
+\begin{proof}
+    Konstrukcja jest identyczna jak ta w lemacie \ref{lem:perm_symetrie}.
+\end{proof}
 
 \begin{lem}\label{lem:perm_shifty}
      Dla dowolnego \(n\) oraz \(k \in \{0, 1, \ldots, n-1\}\) istnieje sieć o \(n\) wejściach i \(n\) wyjściach o głębokości 2 realizująca \(\id n\) i \(\shift{n}{k}\).
@@ -270,8 +285,37 @@ Podobnie na wyjściu mamy \(n\) przełączników i z każdego ich wejścia prowa
     Sieć Beneša--Waksmana realizuje wszystkie permutacje.
 \end{tw}
 \begin{proof}
-    
+    Niech $\pi$ będzie dowolną permutacją z $S_n$. Pokażemy, że istnieje ustawienie przełączników takie, że dane z i tego portu wejściowego zostaną przesłane na $\pi(i)$ port wyjściowy. 
+    Niech $G_\pi = (V, E)$ będzie grafem w którym:
+    \begin{itemize}
+        \item $V = V_i \cup V_o \cup V_m$. Każdy z tych wierzchołków otrzymuje etykietę.
+        \begin{itemize}
+            \item $V_i$ wierzchołki odpowiadające portom wejściowym sieci.
+             Wierzchołek z $V_i$ odpowiadający i-temu portowi wejściowemu otrzymuje etykietę i.
+            \item $V_o$ wierzchołki odpowiadające portom z ostatniej warstwy po dwa na przełącznik. Jeżeli te wierzchołki odpowiadają j-temu przełącznikowi z ostatniej warstwy to otrzymują etykiety $i''$ i $k''$ takie, że $2 - 1 = \pi(i)$ oraz $2j = \pi(k)$.
+            \item $V_m$ dodatkowe wierzchołki które otrzymują etykiety ze zbioru ${1', 2', ..., n'}$
+        \end{itemize}
+        \item $E = E_i \cup E_m \cup E_o$ składa się z:
+        \begin{itemize}
+            \item $n/2$ krawędzi w zbiorze $E_i$ o etykietach $2i-1$ i $2i$, a więc takie które odpowiadają sąsiednim portom wejściowym.
+            \item $n/2$ krawędzi w zbiorze $E_o$ łączący wierzchołki odpowiadające temu samemu przełącznikowi na ostatniej warstwie.
+            \item  $2n$ krawędzi w zbiorze $E_m$ łączących wierzchołki o etykietach $i$ i $i'$ oraz wierzchołki o etykietach $i'$ i $i''$.
+        \end{itemize}
+    \end{itemize} 
+    Tak zdefiniowany graf jest sumą rozłączoną cykli parzystej długości. Jest tak ponieważ stopień każdego wierzchołka jest równy 2 a więc jest sumą rozłącznych cykli. Każdy cykl zawiera parzystą liczbę wierzchołków z $V_i$ i $V_o$ z czego wynika, że zawiera też parzystą liczbę wierzchołków z $V_m$.
+    Wobec tego graf $G_\pi$ jest dwukolorowalny.
+    W związku z tym takie kolorowanie spełnia:
+    \begin{itemize}
+        \item Wierzchołki odpowiadające sąsiednim portom otrzymują różne kolory.
+        \item Wierzchołki o etykietach $i$ oraz $i''$ otrzymują ten sam kolor
+    \end{itemize}
+    Konsekwencja tego jest:
+    \begin{itemize}
+        \item 
+    \end{itemize}
+
 \end{proof}
+\todo{obrazek do dwukolorowania}
 \todo{Przykład małej sieci}
 
 \begin{pyt}
@@ -492,7 +536,7 @@ Przyjrzyjmy się tym etapom na przykładzie -- niech \(n=64\) oraz \(2^k = 2\).
 \hline
  0 &  1 \\
  8 &  9 \\
-\ldots & \ddots \\
+\vdots & \vdots \\
  48 & 49 \\
  56 & 57 \\
  \hline
@@ -534,16 +578,88 @@ To pozwala już sformułować przybliżoną konstrukcję sieci. Aby skonstruowa�
 \begin{itemize}
     \item sieci realizującej transpozycję i \(\id n\) (oznaczmy ją \(T_1\)),
     \item \(m\) sieci realizujących \( \twoshift m\) -- czyli \(m\) kopii sieci \(P_m\) (nazwijmy je \textit{blokiem wierszowym}),
-    \item \(m\) sieci realizujących \(\shift m 1\) oraz \(\id m\) dla każdej kolumny -- oznaczmy je \(K_0, K_1, \ldots, K_{m-1}\) i nazwijmy je \textit{blokiem kolumnowym}
+    \item \(m\) sieci realizujących \(\shift m 1\) oraz \(\id m\) dla każdej kolumny, takich jak w lemacie \ref{lem:perm_shifty} -- nazwijmy je \textit{blokiem kolumnowym}
     \item oraz drugiej sieci realizującej transpozycję i \(\id n\) (oznaczmy ją \(T_2\)).
 \end{itemize}
 
+\todo{schematyczny rysunek bloków}
+
+Oczywiście transpozycja jest inwolucją -- w związku z tym sieci\(T_1\) i \(T_2\) mogą zostać utworzone tak jak w lemacie \ref{lem:perm_inwolucje}. 
 W terminach tak skonstruowanej sieci zrealizowanie przesunięcia cyklicznego o \(2^k\) wygląda następująco:
 
 \begin{itemize}
     \item gdy \(2^k\) jest małe, aktywujemy blok wierszowy, tak by wykonał \(\shift m {2^k}\) na każdym wierszu, a następnie aktywujemy blok kolumnowy, tak by wykonał \(\shift m 1\) na ostatnich \(2^k\) kolumnach,
     \item gdy \(2^k\) jest duże, aktywujemy sieć \(T_1\), tak by wykonała transpozycję, aktywujemy blok wierszowy, tak by wykonał \(\shift m {2^k/m}\) na każdym wierszu, a na końcu aktywujemy aktywujemy sieć \(T_2\), tak by wykonała transpozycję.
 \end{itemize}
+
+Udało nam się skonstruwać sieć realizującą \(\twoshift n\). Zbadajmy teraz jej głębokość i rozmiar.
+
+\begin{lem}
+    Sieć przedstawiona wyżej ma głębokość równą \(D(n) = \Theta(\log \log n)\).
+\end{lem}
+
+\begin{proof}
+    Zauważmy, że zarówno blok \(T_1\), jaki i blok \(T_2\), mają głębokość równą 1. Blok kolumnowy ma głębokość równą 2, a blok wierszowy -- \(D(m) = D(\sqrt{n})\). Wobec tego głębokość sieci wyraża się następującym równaniem rekurencyjnym:
+    \[
+    D(n) = D(\sqrt n) + O(1) \td
+    \]
+    Do rozwiązania tej rekurencji zastosujemy metodę podstawiania. Niech \(s = \log n\). Mamy wówczas
+    \[
+    D(2^s) = D(2^{s/2}) + O(1) \td
+    \]
+    Oznaczmy \(B(s) = D(2^s)\). Dla \(B\) rekurencja przedstawia się następująco:
+    \[
+    B(s) = B\left(\frac s 2\right) + O(1) \td
+    \]
+    Na mocy twierdzenia o rekurencji uniwersalnej (ang. \textit{master theorem}, \cite{cormen}) otrzymujemy
+    \[
+    B(s) = \Theta(\log s) \tc
+    \]
+    a zapisując powyższą równość w terminach \(D\), dostajemy
+    \[
+    D(n) = D(2^s) = B(s) = \Theta(\log s) = \Theta(\log \log n) \td
+    \]
+\end{proof}
+
+\begin{lem}
+    Sieć przedstawiona wyżej ma rozmiar równy \(S(n) = \Theta(n \log \log n)\). 
+\end{lem}
+
+\begin{proof}
+    Zauważmy, że sieci \(T_1\) i \(T_2\) mają rozmiar równy \( \floor{\frac{n - \sqrt{n}}{2}} \). Ponadto rozmiar całego bloku kolumnowego wynosi co najwyżej \(m \cdot \frac{m}{2} \cdot 2\), gdzie \(m = \sqrt{n}\), a rozmiar bloku wierszowego to \(mS(m)\).  Otrzymujemy zatem następujące równanie rekurencyjne
+    \[
+    S(n) = 2 \cdot \floor{\frac{n - \sqrt{n}}{2}} + O\left(\sqrt{n} \cdot \frac{\sqrt{n}}{2} \cdot 2\right) + \sqrt{n}S(\sqrt{n})
+    = \sqrt{n}S(\sqrt{n}) + \Theta(n) \td
+    \]
+    Przypomnijmy, że \(n = 2^{2^r}\). 
+    % Przeprowadzimy dowód indukcyjny względem \(r\). Załóżmy, że 
+    % \[
+    % S(\sqrt n) = S\lt( 2^{2^{r-1}} \rt) = \Theta\lt( 2^{2^{r-1}} (r-1)\rt) \tc
+    % \]
+    % czyli istnieją \(c, d \in \R_{+}\), takie że
+    % \[
+    % c \cdot 2^{2^{r-1}} (r-1)  \leq S\lt( 2^{2^{r-1}} \rt) \leq
+    % d \cdot 2^{2^{r-1}} (r-1) \td
+    % \]
+    % Wobec tego
+    % \begin{align*}
+    %     S\lt( 2^{2^r} \rt) 
+    %     &= 2^{2^{r-1}} \cdot S\lt( 2^{2^{r-1}} \rt) + \Theta\lt( 2^{2^r} \rt) \\
+    %     &\geq  2^{2^{r-1}} \cdot c \cdot 2^{2^{r-1}} (r-1) +  \Theta\lt( 2^{2^r} \rt) \\
+    %     &= c \cdot 2^{2^r} (r-1) + \Theta\lt( 2^{2^r} \rt) \\
+    %     &= c \cdot 2^{2^r} r - c \cdot 2^{2^r} +  \Theta\lt( 2^{2^r} \rt) \\
+    %     &\geq c \cdot 2^{2^r} r
+    % \end{align*}
+
+    % Mamy zatem
+    % \begin{align*}
+    %     S(n) &= S(2^{2^r}) = 2^{2^{r-1}} \cdot S\left( 2^{2^r-1} \right) + O\lt( 2^{2^r} \rt) \\
+    %     &= 2^{2^{r-1}} \cdot \lt( 2^{2^{r-2}} \cdot S\left( 2^{2^r-2} \right) + O\lt( 2^{2^{r-1}} \rt) \rt) + O\lt( 2^{2^r} \rt) \\
+    %     &= 2^{2^{r-1} + 2^{r-2}} \cdot S \lt( 2^{2^{r-2}} \rt) + 2^{2^{r-1}} \cdot O\lt( 2^{2^{r-1}} \rt) + O\lt( 2^{2^{r}} \rt)
+    % \end{align*}
+    \todo{dokończyć dowód}
+    
+\end{proof}
 
 
 % ------------------ Co dalej? -------------------
@@ -557,6 +673,9 @@ Losowe ustawianie przełączników -- analiza probabilistyczna.
 \begin{thebibliography}{9}
 \bibitem{klo}
 Juraj Hromkovič, Przemyslawa Kanarek, Ralf Klasing, Krzysztof Lorys, Walter Unger, et al.. \emph{On the Size of Permutation Networks and Consequences for Efficient Simulation of Hypercube Algorithms on Bounded-Degree Networks}. SIAM Journal on Discrete Mathematics, 2009, 23 (3), pp.1612–1645. ff10.1137/060669164ff. ffhal-00402764f
+
+\bibitem{cormen}
+Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein, \emph{Introduction to Algorithms}, The MIT Press, 2022
 \end{thebibliography}
 
 \end{document}
