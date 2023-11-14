@@ -10,6 +10,14 @@
 \usepackage{array}
 \usepackage{caption}
 \usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+
+\definecolor{ududff}{rgb}{0.30196078431372547,0.30196078431372547,1.}
+\definecolor{xdxdff}{rgb}{0.49019607843137253,0.49019607843137253,1.}
+\definecolor{uuuuuu}{rgb}{0.26666666666666666,0.26666666666666666,0.26666666666666666}
 
 
 % do uzupełnienia
@@ -136,6 +144,57 @@ Zacznijmy od najistotniejszej dla tej pracy kwestii -- czyli definicji przełąc
 \end{itemize}
 
 \todo{rysunek przełącznika w dwóch stanach}
+\begin{center}
+    \begin{minipage}{.5\textwidth} %
+        \begin{center}
+            \begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=0.5cm,y=0.5cm]
+            \clip(-2,-1.) rectangle (6.,7.5);
+            \draw [line width=1.pt] (0.,0.)-- (4.,0.);
+            \draw [line width=1.pt] (4.,0.)-- (4.,7.);
+            \draw [line width=1.pt] (4.,7.)-- (0.,7.);
+            \draw [line width=1.pt] (0.,7.)-- (0.,0.);
+            \draw (-2.,6.8) node[anchor=north west] {0};
+            \draw (5.3,6.8) node[anchor=north west] {0};
+            \draw (-2.,2.8) node[anchor=north west] {1};
+            \draw (5.3,2.8) node[anchor=north west] {1};
+            \draw [line width=1.pt] (0.,5.5)-- (-2.,5.5);
+            \draw [line width=1.pt] (4.,5.5)-- (6.,5.5);
+            \draw [line width=1.pt] (0.,1.5)-- (-2.,1.5);
+            \draw [line width=1.pt] (4.,1.5)-- (6.,1.5);
+            \draw [line width=1.pt, dashed] (4.,1.5)-- (0.,1.5);
+            \draw [line width=1.pt, dashed] (0.,5.5)-- (4.,5.5);
+            \end{tikzpicture}
+            
+            {\it Przełącznik w stanie nieaktywnym}
+        \end{center}
+        
+    \end{minipage}%
+    \begin{minipage}{.5\textwidth} %
+        \begin{center} 
+            \begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=0.5cm,y=0.5cm]
+            \clip(-2,-1.) rectangle (6.,7.5);
+            \draw [line width=1.pt] (0.,0.)-- (4.,0.);
+            \draw [line width=1.pt] (4.,0.)-- (4.,7.);
+            \draw [line width=1.pt] (4.,7.)-- (0.,7.);
+            \draw [line width=1.pt] (0.,7.)-- (0.,0.);
+            \draw (-2.,6.8) node[anchor=north west] {0};
+            \draw (5.3,6.8) node[anchor=north west] {1};
+            \draw (-2.,2.8) node[anchor=north west] {1};
+            \draw (5.3,2.8) node[anchor=north west] {0};
+            \draw [line width=1.pt] (0.,5.5)-- (-2.,5.5);
+            \draw [line width=1.pt] (4.,5.5)-- (6.,5.5);
+            \draw [line width=1.pt] (0.,1.5)-- (-2.,1.5);
+            \draw [line width=1.pt] (4.,1.5)-- (6.,1.5);
+            \draw [line width=1.pt, dashed] (4.,1.5)-- (0.,5.5);
+            \draw [line width=1.pt, dashed] (0.,1.5)-- (4.,5.5);
+            \end{tikzpicture}
+
+            {\it Przełącznik w stanie aktywnym}
+        \end{center}
+    \end{minipage} 
+\end{center}
+
+\vspace{1em}
 
 Przełączniki w naturalny sposób możemy ze sobą łączyć {\bf przewodami} -- sygnał z wyjścia jednego przełącznika może zostać przekierowany przewodem na wejście innego przełącznika. 
 
@@ -156,8 +215,137 @@ Połączone przewodniki tworzą {\bf sieć przełączników}. Dokładniej, sieci
 Ponadto wejścia i wyjścia sieci numerujemy liczbami od \(0\) do \(n-1\).
 
 \todo{przykłady sieci}
+\begin{center}
+
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=0.5cm,y=0.5cm]
+\clip(-2.,-1.) rectangle (8.,9.);
+
+\draw [line width=1.pt] (0.,0.)-- (1.,0.);
+\draw [line width=1.pt] (1.,2.)-- (1.,0.);
+\draw [line width=1.pt] (1.,2.)-- (0.,2.);
+\draw [line width=1.pt] (0.,0.)-- (0.,2.);
+\draw [line width=1.pt] (0.,3.)-- (1.,3.);
+\draw [line width=1.pt] (1.,3.)-- (1.,5.);
+\draw [line width=1.pt] (1.,5.)-- (0.,5.);
+\draw [line width=1.pt] (0.,3.)-- (0.,5.);
+\draw [line width=1.pt] (3.,8.)-- (3.,6.);
+\draw [line width=1.pt] (3.,6.)-- (4.,6.);
+\draw [line width=1.pt] (4.,6.)-- (4.,8.);
+\draw [line width=1.pt] (4.,8.)-- (3.,8.);
+\draw [line width=1.pt] (3.,5.)-- (3.,3.);
+\draw [line width=1.pt] (3.,3.)-- (4.,3.);
+\draw [line width=1.pt] (4.,3.)-- (4.,5.);
+\draw [line width=1.pt] (4.,5.)-- (3.,5.);
+\draw [line width=1.pt] (3.,2.)-- (3.,0.);
+\draw [line width=1.pt] (3.,0.)-- (4.,0.);
+\draw [line width=1.pt] (4.,0.)-- (4.,2.);
+\draw [line width=1.pt] (4.,2.)-- (3.,2.);
+\draw [line width=1.pt] (6.,8.)-- (6.,6.);
+\draw [line width=1.pt] (6.,6.)-- (7.,6.);
+\draw [line width=1.pt] (7.,6.)-- (7.,8.);
+\draw [line width=1.pt] (7.,8.)-- (6.,8.);
+\draw [line width=1.pt] (6.,5.)-- (6.,3.);
+\draw [line width=1.pt] (6.,3.)-- (7.,3.);
+\draw [line width=1.pt] (7.,3.)-- (7.,5.);
+\draw [line width=1.pt] (7.,5.)-- (6.,5.);
+\draw [line width=1.pt] (6.,2.)-- (6.,0.);
+\draw [line width=1.pt] (6.,0.)-- (7.,0.);
+\draw [line width=1.pt] (7.,0.)-- (7.,2.);
+\draw [line width=1.pt] (7.,2.)-- (6.,2.);
+
+\draw [line width=1.pt] (0.,4.5)-- (-1.,4.5);
+\draw [line width=1.pt] (0.,3.5)-- (-1.,3.5);
+\draw [line width=1.pt] (0.,1.5)-- (-1.,1.5);
+\draw [line width=1.pt] (0.,0.5)-- (-1.,0.5);
+\draw [line width=1.pt] (3.,7.5)-- (-1.,7.5);
+\draw [line width=1.pt] (3.,6.5)-- (-1.,6.5);
+
+\draw [line width=1.pt] (1.,4.5)-- (3.,1.5);
+\draw [line width=1.pt] (1.,3.5)-- (3.,3.5);
+\draw [line width=1.pt] (1.,1.5)-- (3.,4.5);
+\draw [line width=1.pt] (1.,0.5)-- (3.,0.5);
+\draw [line width=1.pt] (4.,1.5)-- (6.,6.5);
+\draw [line width=1.pt] (4.,7.5)-- (6.,7.5);
+\draw [line width=1.pt] (4.,6.5)-- (6.,4.5);
+\draw [line width=1.pt] (4.,4.5)-- (6.,3.5);
+\draw [line width=1.pt] (4.,3.5)-- (6.,1.5);
+\draw [line width=1.pt] (4.,0.5)-- (6.,0.5);
+\draw [line width=1.pt] (7.,7.5)-- (7.5,7.5);
+\draw [line width=1.pt] (7.,6.5)-- (7.5,6.5);
+\draw [line width=1.pt] (7.,4.5)-- (7.5,4.5);
+\draw [line width=1.pt] (7.,3.5)-- (7.5,3.5);
+\draw [line width=1.pt] (7.,1.5)-- (7.5,1.5);
+\draw [line width=1.pt] (7.,0.5)-- (7.5,0.5);
+\end{tikzpicture}
+\end{center}
+
 
 \todo{antyprzykłady sieci}
+\begin{center}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=0.5cm,y=0.5cm]
+\clip(-2.,-1.) rectangle (8.,9.);
+\draw [line width=1.pt] (0.,0.)-- (1.,0.);
+\draw [line width=1.pt] (1.,2.)-- (1.,0.);
+\draw [line width=1.pt] (1.,2.)-- (0.,2.);
+\draw [line width=1.pt] (0.,0.)-- (0.,2.);
+\draw [line width=1.pt] (0.,3.)-- (1.,3.);
+\draw [line width=1.pt] (1.,3.)-- (1.,5.);
+\draw [line width=1.pt] (1.,5.)-- (0.,5.);
+\draw [line width=1.pt] (0.,3.)-- (0.,5.);
+\draw [line width=1.pt] (3.,8.)-- (3.,6.);
+\draw [line width=1.pt] (3.,6.)-- (4.,6.);
+\draw [line width=1.pt] (4.,6.)-- (4.,8.);
+\draw [line width=1.pt] (4.,8.)-- (3.,8.);
+\draw [line width=1.pt] (3.,5.)-- (3.,3.);
+\draw [line width=1.pt] (3.,3.)-- (4.,3.);
+\draw [line width=1.pt] (4.,3.)-- (4.,5.);
+\draw [line width=1.pt] (4.,5.)-- (3.,5.);
+\draw [line width=1.pt] (3.,2.)-- (3.,0.);
+\draw [line width=1.pt] (3.,0.)-- (4.,0.);
+\draw [line width=1.pt] (4.,0.)-- (4.,2.);
+\draw [line width=1.pt] (4.,2.)-- (3.,2.);
+\draw [line width=1.pt] (6.,8.)-- (6.,6.);
+\draw [line width=1.pt] (6.,6.)-- (7.,6.);
+\draw [line width=1.pt] (7.,6.)-- (7.,8.);
+\draw [line width=1.pt] (7.,8.)-- (6.,8.);
+\draw [line width=1.pt] (6.,5.)-- (6.,3.);
+\draw [line width=1.pt] (6.,3.)-- (7.,3.);
+\draw [line width=1.pt] (7.,3.)-- (7.,5.);
+\draw [line width=1.pt] (7.,5.)-- (6.,5.);
+\draw [line width=1.pt] (6.,2.)-- (6.,0.);
+\draw [line width=1.pt] (6.,0.)-- (7.,0.);
+\draw [line width=1.pt] (7.,0.)-- (7.,2.);
+\draw [line width=1.pt] (7.,2.)-- (6.,2.);
+\draw [line width=1.pt] (0.,4.5)-- (-1.,4.5);
+\draw [line width=1.pt] (0.,3.5)-- (-1.,3.5);
+\draw [line width=1.pt] (0.,1.5)-- (-1.,1.5);
+\draw [line width=1.pt] (0.,0.5)-- (-1.,0.5);
+\draw [line width=1.pt] (7.,7.5)-- (7.5,7.5);
+\draw [line width=1.pt] (7.,6.5)-- (7.5,6.5);
+\draw [line width=1.pt] (7.,4.5)-- (7.5,4.5);
+\draw [line width=1.pt] (7.,3.5)-- (7.5,3.5);
+\draw [line width=1.pt] (7.,1.5)-- (7.5,1.5);
+\draw [line width=1.pt] (7.,0.5)-- (7.5,0.5);
+\draw [line width=1.pt] (1.,4.5)-- (3.,4.5);
+\draw [line width=1.pt] (1.,4.5)-- (3.,3.5);
+\draw [line width=1.pt] (1.,3.5)-- (3.,4.5);
+\draw [line width=1.pt] (1.,1.5)-- (1.7813908792453008,1.5039475958137278);
+\draw [line width=1.pt] (1.7813908792453008,1.5039475958137278)-- (1.7656781783217494,0.4983347367064437);
+\draw [line width=1.pt] (1.7656781783217494,0.4983347367064437)-- (1.,0.5);
+\draw [line width=1.pt] (-1.0154698851468411,7.600475554151638)-- (3.,6.5);
+\draw [line width=1.pt] (-1.0154698851468411,7.600475554151638)-- (3.,7.5);
+\draw [line width=1.pt] (4.,7.5)-- (4.798229456567162,8.401823301252755);
+\draw [line width=1.pt] (4.,6.5)-- (6.,7.5);
+\draw [line width=1.pt] (4.,6.5)-- (6.,6.5);
+\draw [line width=1.pt] (4.,4.5)-- (6.,4.5);
+\draw [line width=1.pt] (3.,1.5)-- (1.,3.5);
+\draw [line width=1.pt] (3.,0.5)-- (1.7656781783217494,0.4983347367064437);
+\draw [line width=1.pt] (4.,3.5)-- (6.,1.5);
+\draw [line width=1.pt] (4.,1.5)-- (6.,3.5);
+\draw [line width=1.pt] (4.,0.5)-- (6.,0.5);
+\draw [line width=1.pt] (7.,7.5)-- (7.5,6.5);
+\end{tikzpicture}
+\end{center}
 
 \begin{df}
     Mówimy, że sieć przełączników o \(n\) wejściach i \(n\) wyjściach realizuje permutację \(\sigma \in S_n\), gdy każdemu przewodnikowi możemy nadać stan (aktywny lub nieaktywny) tak, by dla sygnałów w kolejności \(0, 1, \ldots, n-1\) na wejściu otrzymać sygnały w kolejności \(\sigma (0), \sigma (1), \ldots, \sigma (n-1)\) na wyjściu. 
@@ -176,6 +364,73 @@ Ponadto wejścia i wyjścia sieci numerujemy liczbami od \(0\) do \(n-1\).
 \end{df}
 
 \todo{sieć o rozmiarze x i głębokości y}
+\begin{center}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=0.5cm,y=0.5cm]
+
+\clip(-2.,-1.) rectangle (12.,9.);
+\draw [line width=1.pt] (0.,0.)-- (1.,0.);
+\draw [line width=1.pt] (1.,0.)-- (1.,2.);
+\draw [line width=1.pt] (1.,2.)-- (0.,2.);
+\draw [line width=1.pt] (0.,0.)-- (0.,2.);
+\draw [line width=1.pt] (3.,2.)-- (3.,0.);
+\draw [line width=1.pt] (4.,0.)-- (3.,0.);
+\draw [line width=1.pt] (4.,0.)-- (4.,2.);
+\draw [line width=1.pt] (4.,2.)-- (3.,2.);
+\draw [line width=1.pt] (6.,2.)-- (6.,0.);
+\draw [line width=1.pt] (6.,0.)-- (7.,0.);
+\draw [line width=1.pt] (7.,0.)-- (7.,2.);
+\draw [line width=1.pt] (7.,2.)-- (6.,2.);
+\draw [line width=1.pt] (9.,2.)-- (9.,0.);
+\draw [line width=1.pt] (9.,0.)-- (10.,0.);
+\draw [line width=1.pt] (10.,0.)-- (10.,2.);
+\draw [line width=1.pt] (10.,2.)-- (9.,2.);
+\draw [line width=1.pt] (6.,3.)-- (7.,3.);
+\draw [line width=1.pt] (7.,3.)-- (7.,5.);
+\draw [line width=1.pt] (7.,5.)-- (6.,5.);
+\draw [line width=1.pt] (6.,5.)-- (6.,3.);
+\draw [line width=1.pt] (9.,3.)-- (10.,3.);
+\draw [line width=1.pt] (10.,3.)-- (10.,5.);
+\draw [line width=1.pt] (10.,5.)-- (9.,5.);
+\draw [line width=1.pt] (9.,5.)-- (9.,3.);
+\draw [line width=1.pt] (9.,6.)-- (10.,6.);
+\draw [line width=1.pt] (10.,6.)-- (10.,8.);
+\draw [line width=1.pt] (10.,8.)-- (9.,8.);
+\draw [line width=1.pt] (9.,6.)-- (9.,8.);
+\draw [line width=1.pt] (3.,5.)-- (3.,3.);
+\draw [line width=1.pt] (4.,3.)-- (3.,3.);
+\draw [line width=1.pt] (4.,3.)-- (4.,5.);
+\draw [line width=1.pt] (4.,5.)-- (3.,5.);
+\draw [line width=1.pt] (6.,6.)-- (7.,6.);
+\draw [line width=1.pt] (7.,6.)-- (7.,8.);
+\draw [line width=1.pt] (7.,8.)-- (6.,8.);
+\draw [line width=1.pt] (6.,8.)-- (6.,6.);
+\draw [line width=1.pt] (1.,1.5)-- (3.,3.5);
+\draw [line width=1.pt] (3.,4.5)-- (-1.,4.5);
+\draw [line width=1.pt] (0.,0.5)-- (-1.,0.5);
+\draw [line width=1.pt] (0.,1.5)-- (-1.,1.5);
+\draw [line width=1.pt] (1.,0.5)-- (3.,1.5);
+\draw [line width=1.pt] (-1.,3.5)-- (1.5,3.5);
+\draw [line width=1.pt] (1.5,3.5)-- (3.,0.5);
+\draw [line width=1.pt] (6.,6.5)-- (-1.,6.5);
+\draw [line width=1.pt] (6.,7.5)-- (-1.,7.5);
+\draw [line width=1.pt] (4.,4.5)-- (6.,1.5);
+\draw [line width=1.pt] (4.,3.5)-- (6.,4.5);
+\draw [line width=1.pt] (4.,1.5)-- (6.,3.5);
+\draw [line width=1.pt] (4.,0.5)-- (6.,0.5);
+\draw [line width=1.pt] (7.,7.606293605001243)-- (9.,1.5);
+\draw [line width=1.pt] (7.,6.5)-- (9.,6.5);
+\draw [line width=1.pt] (7.,4.5)-- (9.,7.5);
+\draw [line width=1.pt] (7.,3.5)-- (9.,3.5);
+\draw [line width=1.pt] (7.,1.5)-- (9.,4.5);
+\draw [line width=1.pt] (7.,0.5)-- (9.,0.5);
+\draw [line width=1.pt] (10.,1.5)-- (11.,1.5);
+\draw [line width=1.pt] (10.,0.5)-- (11.,0.5);
+\draw [line width=1.pt] (10.,3.5)-- (11.,3.5);
+\draw [line width=1.pt] (10.,4.5)-- (11.,4.5);
+\draw [line width=1.pt] (10.,6.5)-- (11.,6.5);
+\draw [line width=1.pt] (10.,7.5)-- (11.,7.5);
+\end{tikzpicture}
+\end{center}
 
 \subsection{Najprostsze sieci}
 
@@ -262,7 +517,7 @@ Odpowiedź to tak.
     Jaka jest minimalna liczba przełączników żeby zrealizować wszystkie permutacje z \(S_n\)?
 \end{pyt}
 \begin{tw}
-    Żeby zrealizować każdą permutację z \(S_n\) potrzeba sieci o co najmniej \(O(n \log n )\) przełącznikach.
+    Żeby zrealizować każdą permutację z \(S_n\) potrzeba sieci o co najmniej \(\Omega(n \log n )\) przełącznikach.
 \end{tw}
 \begin{proof}
 Ustalmy n $\in \mathbb{N}$.
@@ -270,7 +525,7 @@ Zauważmy, że przełącznik, co najwyżej, zwiększa ilość realizowanych perm
 Niech $\sigma$ będzie siecią która realizuje wszystkie \(n!\) permutacji. Niech \(F\) będzie funkcją która sieci przyporządkowuje ilość przełączników która się w niej znajduje.
 Wtedy $log(n!) \leq F(\sigma)$. Ze wzoru Stirlinga z możemy oszacować \(n!\) z dołu przez $(n/e)^n$. Wówczas
 \[
-    \log (n!) \geq \log ( (n/e)^n ) = n(\log n - \log e) = O(n \log n)
+    \log (n!) \geq \log ( (n/e)^n ) = n(\log n - \log e) = \Omega(n \log n)
 \]
 \end{proof}
 \begin{pyt}
@@ -281,6 +536,88 @@ Konstrukcja polega na podzieleniu problemu na dwa identyczne pod problemy i pomy
 Na wejściu mamy \(n\) przełączników z każdego ich wyjścia prowadzimy przewód do wejść obu pod sieci o rozmiarze \(n/2\).
 Podobnie na wyjściu mamy \(n\) przełączników i z każdego ich wejścia prowadzimy przewód do wyjść obu podsieci o rozmiarze \(n/2\).
 \todo{Konstrukcja sieci Beneša--Waksmana}
+\begin{center}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=0.5cm,y=0.5cm]
+\clip(-2.,-1.) rectangle (11.,12.);
+\draw [line width=1.pt] (0.,0.)-- (1.,0.);
+\draw [line width=1.pt] (1.,0.)-- (1.,2.);
+\draw [line width=1.pt] (1.,2.)-- (0.,2.);
+\draw [line width=1.pt] (0.,2.)-- (0.,0.);
+\draw [line width=1.pt] (0.,3.)-- (1.,3.);
+\draw [line width=1.pt] (1.,3.)-- (1.,5.);
+\draw [line width=1.pt] (1.,5.)-- (0.,5.);
+\draw [line width=1.pt] (0.,5.)-- (0.,3.);
+\draw [line width=1.pt] (0.,6.)-- (1.,6.);
+\draw [line width=1.pt] (1.,6.)-- (1.,8.);
+\draw [line width=1.pt] (1.,8.)-- (0.,8.);
+\draw [line width=1.pt] (0.,8.)-- (0.,6.);
+\draw [line width=1.pt] (0.,9.)-- (1.,9.);
+\draw [line width=1.pt] (1.,9.)-- (1.,11.);
+\draw [line width=1.pt] (1.,11.)-- (0.,11.);
+\draw [line width=1.pt] (0.,11.)-- (0.,9.);
+\draw [line width=1.pt] (3.,11.)-- (3.,6.);
+\draw [line width=1.pt] (3.,6.)-- (6.,6.);
+\draw [line width=1.pt] (6.,11.)-- (6.,6.);
+\draw [line width=1.pt] (6.,11.)-- (3.,11.);
+\draw [line width=1.pt] (3.,5.)-- (3.,0.);
+\draw [line width=1.pt] (3.,5.)-- (6.,5.);
+\draw [line width=1.pt] (6.,5.)-- (6.,0.);
+\draw [line width=1.pt] (6.,0.)-- (3.,0.);
+\draw [line width=1.pt] (8.,11.)-- (9.,11.);
+\draw [line width=1.pt] (9.,11.)-- (9.,9.);
+\draw [line width=1.pt] (9.,9.)-- (8.,9.);
+\draw [line width=1.pt] (8.,9.)-- (8.,11.);
+\draw [line width=1.pt] (8.,8.)-- (8.,6.);
+\draw [line width=1.pt] (8.,6.)-- (9.,6.);
+\draw [line width=1.pt] (9.,6.)-- (9.,8.);
+\draw [line width=1.pt] (9.,8.)-- (8.,8.);
+\draw [line width=1.pt] (8.,5.)-- (8.,3.);
+\draw [line width=1.pt] (8.,3.)-- (9.,3.);
+\draw [line width=1.pt] (9.,3.)-- (9.,5.);
+\draw [line width=1.pt] (9.,5.)-- (8.,5.);
+\draw [line width=1.pt] (8.,2.)-- (8.,0.);
+\draw [line width=1.pt] (8.,0.)-- (9.,0.);
+\draw [line width=1.pt] (9.,0.)-- (9.,2.);
+\draw [line width=1.pt] (9.,2.)-- (8.,2.);
+\draw [line width=1.pt] (0.,10.5)-- (-1.,10.5);
+\draw [line width=1.pt] (0.,9.5)-- (-1.,9.5);
+\draw [line width=1.pt] (0.,7.5)-- (-1.,7.5);
+\draw [line width=1.pt] (0.,6.5)-- (-1.,6.5);
+\draw [line width=1.pt] (0.,4.5)-- (-1.,4.5);
+\draw [line width=1.pt] (0.,3.5)-- (-1.,3.5);
+\draw [line width=1.pt] (0.,1.5)-- (-1.,1.5);
+\draw [line width=1.pt] (0.,0.5)-- (-1.,0.5);
+\draw [line width=1.pt] (1.,10.5)-- (3.,10.5);
+\draw [line width=1.pt] (1.,9.5)-- (3.,4.5);
+\draw [line width=1.pt] (1.,7.5)-- (3.,9.5);
+\draw [line width=1.pt] (1.,6.5)-- (3.,3.5);
+\draw [line width=1.pt] (1.,4.5)-- (3.,7.5);
+\draw [line width=1.pt] (1.,3.5)-- (3.,1.5);
+\draw [line width=1.pt] (1.,1.5)-- (3.,6.5);
+\draw [line width=1.pt] (1.,0.5)-- (3.,0.5);
+\draw [line width=1.pt] (6.,10.5)-- (8.,10.5);
+\draw [line width=1.pt] (8.,9.5)-- (6.,4.5);
+\draw [line width=1.pt] (8.,7.5)-- (6.,9.5);
+\draw [line width=1.pt] (8.,6.5)-- (6.,3.5);
+\draw [line width=1.pt] (8.,4.5)-- (6.,7.5);
+\draw [line width=1.pt] (8.,3.5)-- (6.,1.5);
+\draw [line width=1.pt] (8.,1.5)-- (6.,6.5);
+\draw [line width=1.pt] (8.,0.5)-- (6.,0.5);
+\draw [line width=1.pt] (9.,10.5)-- (10.,10.5);
+\draw [line width=1.pt] (9.,9.5)-- (10.,9.5);
+\draw [line width=1.pt] (9.,7.5)-- (10.,7.5);
+\draw [line width=1.pt] (9.,6.5)-- (10.,6.5);
+\draw [line width=1.pt] (9.,4.5)-- (10.,4.5);
+\draw [line width=1.pt] (9.,3.5)-- (10.,3.5);
+\draw [line width=1.pt] (9.,1.5)-- (10.,1.5);
+\draw [line width=1.pt] (9.,0.5)-- (10.,0.5);
+
+\draw (3.2,9.5) node[anchor=north west, align=center] {\small Podsieć \\ \small dla n/2};
+\draw (3.2,3.5) node[anchor=north west, align=center] {\small Podsieć \\ \small dla n/2};
+\end{tikzpicture}
+\end{center}
+
+
 \begin{tw}
     Sieć Beneša--Waksmana realizuje wszystkie permutacje.
 \end{tw}
@@ -303,15 +640,17 @@ Podobnie na wyjściu mamy \(n\) przełączników i z każdego ich wejścia prowa
         \end{itemize}
     \end{itemize} 
     Tak zdefiniowany graf jest sumą rozłączoną cykli parzystej długości. Jest tak ponieważ stopień każdego wierzchołka jest równy 2 a więc jest sumą rozłącznych cykli. Każdy cykl zawiera parzystą liczbę wierzchołków z $V_i$ i $V_o$ z czego wynika, że zawiera też parzystą liczbę wierzchołków z $V_m$.
-    Wobec tego graf $G_\pi$ jest dwukolorowalny.
+    Wobec tego graf $G_\pi$ jest dwu kolorowalny.
     W związku z tym takie kolorowanie spełnia:
     \begin{itemize}
         \item Wierzchołki odpowiadające sąsiednim portom otrzymują różne kolory.
         \item Wierzchołki o etykietach $i$ oraz $i''$ otrzymują ten sam kolor
     \end{itemize}
-    Konsekwencja tego jest:
+    Konsekwencja tego jest, że jeżeli:
     \begin{itemize}
-        \item 
+        \item Dane z białych portów wejściowych wyślemy do górnej podsieci, a czarne do dolnej. 
+        \item Ustawiamy elementy w górnej i dolnej podsieci tak żeby per-mutowały zgodnie z permutacją $\pi$.
+        \item W ostatniej warstwie dla j-tego przełącznika i odpowiadającej mu etykiecie białego wierzchołka i oraz czarnemu wierzchołkowi, o etykiecie k, na tym samym przełączniku. Stosujemy regułę która mówi: Jeśli $i = \pi(2j - 1)$ oraz $k = \pi(2j)$ to przełącznik jest w stanie nieaktywnym w przeciwnym wypadku jest w stanie aktywnym.
     \end{itemize}
 
 \end{proof}
@@ -321,9 +660,9 @@ Podobnie na wyjściu mamy \(n\) przełączników i z każdego ich wejścia prowa
 \begin{pyt}
     Czy da się lepiej?
 \end{pyt}
-Tak. Można usunąć po jednym przełączniku w każdej warstwie.
+Tak. Można usunąć po jednym przełączniku na każdym poziomie sieci.
 \begin{proof}
-    
+    Zauważmy, że jeżeli ustalimy kolor jednego z wierzchołków odpowiadającym portom wyjściowym to jednoznacznie ustalimy całe dwu kolorowanie. Wtedy możemy usunąć przełącznik na którym ustawiliśmy kolor. Ponieważ w białej podsieci istnieje tak ustawienie przełączników, która odpowiada permutacji białych przełączników. 
 \end{proof}
 
 % --- Sieć realizująca wszystkie przesunięcia cykliczne ---
@@ -584,7 +923,7 @@ To pozwala już sformułować przybliżoną konstrukcję sieci. Aby skonstruowa�
 
 \todo{schematyczny rysunek bloków}
 
-Oczywiście transpozycja jest inwolucją -- w związku z tym sieci\(T_1\) i \(T_2\) mogą zostać utworzone tak jak w lemacie \ref{lem:perm_inwolucje}. 
+Oczywiście transpozycja jest inwolucją -- w związku z tym sieci \(T_1\) i \(T_2\) mogą zostać utworzone tak jak w lemacie \ref{lem:perm_inwolucje}. 
 W terminach tak skonstruowanej sieci zrealizowanie przesunięcia cyklicznego o \(2^k\) wygląda następująco:
 
 \begin{itemize}
