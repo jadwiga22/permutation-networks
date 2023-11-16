@@ -123,7 +123,27 @@ permutację \(\sym{n}{k}(i) = (k-i) \mod n\), natomiast przez
 \]
 permutację identycznościową. 
 
-\todo{definicje notacji asymptotycznej}
+\vspace{1em}
+
+Ponadto stosujemy następujące oznaczenia złożoności asymptotycznej (podobnie jak w \cite{cormen}).
+
+\begin{df}
+    Dla danych funkcji \(f, g : \N \to \R\) mówimy, że:
+    \begin{itemize}
+        \item \(f = O(g)\), gdy istnieją \( n_0 \in \N, \,  c > 0\), takie że 
+        \[
+            0 \leq f(n) \leq cg(n)  \text{ dla wszystkich } n \geq n_0 \tc
+        \]
+        \item \(f = \Omega(g)\), gdy istnieją \( n_0 \in \N, \,  c > 0\), takie że 
+        \[
+            0 \leq cg(n) \leq f(n)  \text{ dla wszystkich } n \geq n_0 \tc
+        \]
+        \item  \(f = \Theta(g)\), gdy istnieją \( n_0 \in \N, \,  c_1 > 0, c_2 > 0\), takie że 
+        \[
+            0 \leq c_1 g(n) \leq f(n) \leq c_2 g(n)  \text{ dla wszystkich } n \geq n_0 \td
+        \]
+    \end{itemize}
+\end{df}
 
 
 % -------- podstawowe definicje i fakty -----------
@@ -143,7 +163,7 @@ Zacznijmy od najistotniejszej dla tej pracy kwestii -- czyli definicji przełąc
     \item  aktywnym -- sygnał z wejścia \(i\) trafia do wyjścia \((i+1) \mod 2\) (dla \(i \in \{0,1\}\)).
 \end{itemize}
 
-\todo{rysunek przełącznika w dwóch stanach}
+% \todo{rysunek przełącznika w dwóch stanach}
 \begin{center}
     \begin{minipage}{.5\textwidth} %
         \begin{center}
@@ -509,7 +529,7 @@ Lemat \ref{lem:perm_symetrie} można jednak uogólnić -- zauważmy, że nie kor
 \section{Sieć Beneša--Waksmana}
 
 \begin{pyt}
-    Czy istnieje sięć realizująca wszyskie permutacje z \(S_n\)?
+    Czy istnieje sieć realizująca wszystkie permutacje z \(S_n\)?
 \end{pyt}
 Odpowiedź to tak.
 \todo{Przykład jak konstruować nie optymalnie sieci permutacji}
@@ -970,33 +990,32 @@ Udało nam się skonstruwać sieć realizującą \(\twoshift n\). Zbadajmy teraz
     S(n) = 2 \cdot \floor{\frac{n - \sqrt{n}}{2}} + O\left(\sqrt{n} \cdot \frac{\sqrt{n}}{2} \cdot 2\right) + \sqrt{n}S(\sqrt{n})
     = \sqrt{n}S(\sqrt{n}) + \Theta(n) \td
     \]
-    Przypomnijmy, że \(n = 2^{2^r}\). 
-    % Przeprowadzimy dowód indukcyjny względem \(r\). Załóżmy, że 
-    % \[
-    % S(\sqrt n) = S\lt( 2^{2^{r-1}} \rt) = \Theta\lt( 2^{2^{r-1}} (r-1)\rt) \tc
-    % \]
-    % czyli istnieją \(c, d \in \R_{+}\), takie że
-    % \[
-    % c \cdot 2^{2^{r-1}} (r-1)  \leq S\lt( 2^{2^{r-1}} \rt) \leq
-    % d \cdot 2^{2^{r-1}} (r-1) \td
-    % \]
-    % Wobec tego
-    % \begin{align*}
-    %     S\lt( 2^{2^r} \rt) 
-    %     &= 2^{2^{r-1}} \cdot S\lt( 2^{2^{r-1}} \rt) + \Theta\lt( 2^{2^r} \rt) \\
-    %     &\geq  2^{2^{r-1}} \cdot c \cdot 2^{2^{r-1}} (r-1) +  \Theta\lt( 2^{2^r} \rt) \\
-    %     &= c \cdot 2^{2^r} (r-1) + \Theta\lt( 2^{2^r} \rt) \\
-    %     &= c \cdot 2^{2^r} r - c \cdot 2^{2^r} +  \Theta\lt( 2^{2^r} \rt) \\
-    %     &\geq c \cdot 2^{2^r} r
-    % \end{align*}
+    Przypomnijmy, że \(n = 2^{2^r}\).  Mamy zatem równoważnie
+    \begin{align*}
+         S \lt( 2^{2^r} \rt) 
+         &= 2^{2^{r-1}} S \lt( 2^{2^{r-1}} \rt) + \Theta \lt( 2^{2^r} \rt) \\
+         &= 2^{2^{r-1}} \lt( 2^{2^{r-2}} S \lt( 2^{2^{r-2}} \rt) + \Theta \lt( 2^{2^{r-1}} \rt) \rt) + \Theta \lt( 2^{2^r} \rt) \\
+         &= 2^{2^{r-1} + 2^{r-2}} S \lt( 2^{2^{r-2}} \rt)
+         + 2^{2^{r-1}} \Theta \lt( 2^{2^{r-1}} \rt) + \Theta \lt( 2^{2^{r}} \rt) \\
+         &= 2^{2^{r-1} + 2^{r-2}} S \lt( 2^{2^{r-2}} \rt)
+         + \Theta \lt( 2^{2^{r}} \rt) + \Theta \lt( 2^{2^{r}} \rt) \\
+         &= 2^{2^{r-1} + 2^{r-2}}  \lt( 2^{2^{r-3}} S \lt( 2^{2^{r-3}} \rt) + \Theta \lt( 2^{2^{r-2}} \rt)  \rt)
+         + \Theta \lt( 2^{2^{r}} \rt) + \Theta \lt( 2^{2^{r}} \rt) \\
+         &=  2^{2^{r-1} + 2^{r-2} + 2^{r-3}} S \lt( 2^{2^{r-3}} \rt)  + \Theta \lt( 2^{2^{r}} \rt) + \Theta \lt( 2^{2^{r}} \rt) + \Theta \lt( 2^{2^{r}} \rt) \\
+         &= \ldots \\
+         &=  2^{2^{r-1} + 2^{r-2} + \ldots + 2^{0}} S \lt( 2^{2^{0}} \rt) + r \Theta \lt( 2^{2^{r}} \rt) \\
+         &= 2^{2^{r}-1} S \lt( 2^{2^{0}} \rt) + \Theta \lt( r2^{2^{r}} \rt) \\
+         &= \Theta \lt( 2^{2^{r}} \rt) + \Theta \lt( r 2^{2^{r}} \rt) = \Theta \lt( r2^{2^{r}} \rt)
+    \end{align*}
+   
+    Intuicyjnie: widzimy, że wykładnik wykładnika maleje o 1 w zależności rekurencyjnej. Wobec tego jeśli będziemy iterować wstawianie zależności rekurencyjnej do prawej strony równania, wykonamy \(r\) iteracji, a każda dołoży do ostatecznej sumy składnik \( \Theta \lt( 2^{2^{r}} \rt) \).
 
-    % Mamy zatem
-    % \begin{align*}
-    %     S(n) &= S(2^{2^r}) = 2^{2^{r-1}} \cdot S\left( 2^{2^r-1} \right) + O\lt( 2^{2^r} \rt) \\
-    %     &= 2^{2^{r-1}} \cdot \lt( 2^{2^{r-2}} \cdot S\left( 2^{2^r-2} \right) + O\lt( 2^{2^{r-1}} \rt) \rt) + O\lt( 2^{2^r} \rt) \\
-    %     &= 2^{2^{r-1} + 2^{r-2}} \cdot S \lt( 2^{2^{r-2}} \rt) + 2^{2^{r-1}} \cdot O\lt( 2^{2^{r-1}} \rt) + O\lt( 2^{2^{r}} \rt)
-    % \end{align*}
-    \todo{dokończyć dowód}
+    \vspace{1em}
+
+    Podstawiając \(n = 2^{2^r}\) do otrzymanej równości, otrzymujemy
+    \[
+    S(n) = \Theta(n \log \log n) \td
+    \]
     
 \end{proof}
 
