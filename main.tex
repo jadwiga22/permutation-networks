@@ -27,10 +27,10 @@
 \setlength\parindent{0pt}
 
 % matematyczne
-\renewcommand{\mod}{\,\, \text{mod} \,\,}
-\newcommand{\shift}[2]{\text{shift}_{#2}^{#1}}
-\newcommand{\sym}[2]{\text{sym}_{#2}^{#1}}
-\newcommand{\id}[1]{\text{id}_{#1}}
+\renewcommand{\mod}{\, \operatorname{mod} \,}
+\newcommand{\shift}[2]{\operatorname{shift}_{#2}^{#1}}
+\newcommand{\sym}[2]{\operatorname{sym}_{#2}^{#1}}
+\newcommand{\id}[1]{\operatorname{id}_{#1}}
 \newcommand{\td}{\text{.}}
 \newcommand{\tc}{\text{, }}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
@@ -229,7 +229,8 @@ Połączone przewodniki tworzą {\bf sieć przełączników}. Dokładniej, sieci
     \item  do każdego wyjścia sieci wchodzi dokładnie jeden przewód, 
     \item żaden przewód nie jest podłączony dwoma końcami do tego samego przełącznika,
     \item wejście każdego przewodu jest wpięte do wyjścia pewnego przełącznika lub do wejścia sieci,
-    \item wyjście każdego przewodu jest wpięte do wejścia pewnego przełącznika lub do wyjścia sieci.
+    \item wyjście każdego przewodu jest wpięte do wejścia pewnego przełącznika lub do wyjścia sieci,
+    \item mamy \(n\) wejść i \(n\) wyjść sieci.
 \end{itemize}
 
 Ponadto wejścia i wyjścia sieci numerujemy liczbami od \(0\) do \(n-1\).
@@ -418,7 +419,11 @@ Ponadto wejścia i wyjścia sieci numerujemy liczbami od \(0\) do \(n-1\).
 \end{df}
 
 \begin{df}
-    Głębokość sieci to maksymalna liczba przełączników, przez które przechodzi sygnał od wejścia do wyjścia sieci.  
+    Mówimy, że sieć przełączników o \(n\) wejściach i \(n\) wyjściach ma głębokość równą \(d \in \N\), gdy 
+    \begin{itemize}
+        \item  dla dowolnego przypisania przełącznikom w stanów aktywny/nieaktywny i dowolnego \(i \in \lt\{ 0, 1, \ldots, n-1 \rt\} \) sygnał z wejścia \(i\)--tego przechodzi przez co najwyżej \(d\) przełączników oraz 
+        \item \(d\) jest najmniejszą liczbą o tej własności.
+    \end{itemize}
 \end{df}
 
 W celu zilustrowania powyższych definicji zamieszczamy sieć o rozmiarze równym 9 i głębokości równej 4 (ponieważ np. sygnał z wejścia o numerze 5 może przejść przez 4 przełączniki, natomiast żaden sygnał nie może przejść przez więcej niż 4 przełączniki). 
@@ -491,7 +496,7 @@ W celu zilustrowania powyższych definicji zamieszczamy sieć o rozmiarze równy
 \draw [line width=1.pt] (4.,3.5)-- (6.,4.5);
 \draw [line width=1.pt] (4.,1.5)-- (6.,3.5);
 \draw [line width=1.pt] (4.,0.5)-- (6.,0.5);
-\draw [line width=1.pt] (7.,7.606293605001243)-- (9.,1.5);
+\draw [line width=1.pt] (7.,7.5)-- (9.,1.5);
 \draw [line width=1.pt] (7.,6.5)-- (9.,6.5);
 \draw [line width=1.pt] (7.,4.5)-- (9.,7.5);
 \draw [line width=1.pt] (7.,3.5)-- (9.,3.5);
@@ -508,9 +513,9 @@ W celu zilustrowania powyższych definicji zamieszczamy sieć o rozmiarze równy
 
 \subsection{Najprostsze sieci}
 
-\begin{pyt}
-    Czy istnieje sieć o 6 wejściach i 6 wyjściach mająca rozmiar równy 9, która realizuje wszystkie permutacje z \(S_6\)?
-\end{pyt}
+Zastanówmy się najpierw, czy istnieje sieć o 6 wejściach i 6 wyjściach mająca rozmiar równy 9, która realizuje wszystkie permutacje z \(S_6\)?
+
+\vspace{1em}
 
 Odpowiedź to nie -- łatwo zauważyć, że każdy przełącznik zwiększa liczbę permutacji realizowanych przez sieć co najwyżej dwukrotnie. Wobec tego taka sieć realizuje co najwyżej \(2^9 = 512\) permutacji. Zarazem \(6! = 720 > 512\),  czyli taka sieć nie może istnieć. 
 
@@ -836,8 +841,17 @@ Tak. Można usunąć po jednym przełączniku na każdym poziomie sieci.
 
 \section{Sieć realizująca wszystkie przesunięcia cykliczne}
 W tym rozdziale opiszemy sieci, które realizują dowolne przesuniecie cykliczne.
-Zauważmy, że żeby zrealizować przesunięcie cykliczne o $k$ wystarczy realizować przesunięcia o każdą potęgę dwójki. Dzieje się tak, ponieważ złożenie przesunięcia o $k$ i $l$ to przesunięcie o $k + l$.
-W związku z tym jeżeli chcemy przesunąć naszą permutację o $k$ to wystarczy spojrzeć na zapis binarny $k$. Wtedy jeżeli na jakimś miejscu $i$ w zapisie binarnym $k$ występuje $1$ to włączamy sieć która realizuję przesunięcie cykliczne o $2^i$. Wiemy jak stworzyć sieć która realizuje przesunięcie cykliczne i identyczność i właśnie takiej potrzebujemy. Każda z tych sieci ma $O(n)$ przełączników. My potrzebujmy $\log n$ takich sieci więc nasza sieć będzie miała $O(n \log n)$ przełączników.
+
+\begin{fa}
+    Dla dowolnych \(n, a, b \in \N\) zachodzi
+    \[
+    \shift n a \circ \shift n b = \shift n {a+b} \td
+    \]
+\end{fa}
+
+
+Zauważmy, że żeby zrealizować przesunięcie cykliczne o $k$ wystarczy złożyć sieci realizujące przesunięcia o każdą potęgę dwójki.
+Rozważmy zapis binarny liczby $k$. Jeżeli na $i$--tej pozycji  występuje $1$, to włączamy sieć, która realizuje przesunięcie cykliczne o $2^i$. Dzięki lematowi \ref{lem:perm_shifty} wiemy, jak stworzyć sieć, która realizuje przesunięcie cykliczne i identyczność i właśnie takiej potrzebujemy. Każda z tych sieci ma $O(n)$ przełączników. My potrzebujmy $\log n$ takich sieci więc nasza sieć będzie miała $O(n \log n)$ przełączników.
 
 \todo{Zrobić rysunek tej sieci}
 
@@ -853,7 +867,9 @@ W tym rozdziale chcemy zastanowić się nad konstrukcją sieci o \(n\) wejściac
 
 gdzie \(2^l \leq n\) oraz \(2^{l+1} > n\). Dla uproszczenia przyjmiemy, że \(n = 2^{2^r}\) dla pewnego \(r \in \N\) i oznaczymy \( m = \sqrt{n} = 2^{2^{r-1}} \). Uogólnienie konstrukcji dla dowolnego \(n \in \N\) zostało przedstawione w \cite{klo}.
 
-\vspace{1em}
+% \vspace{1em}
+
+\subsection{Zmiana sposobu reprezentacji ciągu}
 
 W tym rozdziale będziemy wyobrażać sobie zbiór \(\{0, 1, 2, \ldots, n-1\}\) jako macierz o wymiarach \(m \times m\) -- to uzasadnia wybór \(n\), które jest kwadratem liczby naturalnej. Na przykład dla \(r = 2\) mamy \(n = 2^{2^2} = 2^4 = 16\), a macierzowa reprezentacja zbioru wygląda następująco:
 \[
@@ -865,7 +881,11 @@ W tym rozdziale będziemy wyobrażać sobie zbiór \(\{0, 1, 2, \ldots, n-1\}\) 
 \end{matrix}
 \]
 
-Zastanówmy się teraz, jak wyglądają przesunięcia cykliczne o \(2^k\) w tej reprezentacji. Gdy \(2^k\) jest \textit{duże}, to znaczy \(2^k \geq m\) (równoważnie \(k \geq 2^{r-1}\)), to \(m \, | \, 2^k\). Wobec tego \(\shift n {2^k}\) jest przesunięciem cyklicznym o \(2^k / m = 2^k / 2^{2^{r-1}} = 2^{k - 2^{r-1}}\) na zbiorze wierszy. Na przykład dla \(n = 64 = 2^{2^3}\) oraz \(2^k = 2^4 = 2 \cdot \sqrt{64}\) mamy
+Zastanówmy się teraz, jak wyglądają przesunięcia cykliczne o \(2^k\) w tej reprezentacji.
+
+\subsection{Przesunięcia cykliczne o duże \(2^k\)}
+
+ Gdy \(2^k\) jest \textit{duże}, to znaczy \(2^k \geq m\) (równoważnie \(k \geq 2^{r-1}\)), to \(m \, | \, 2^k\). Wobec tego \(\shift n {2^k}\) jest przesunięciem cyklicznym o \(2^k / m = 2^k / 2^{2^{r-1}} = 2^{k - 2^{r-1}}\) na zbiorze wierszy. Na przykład dla \(n = 64 = 2^{2^3}\) oraz \(2^k = 2^4 = 2 \cdot \sqrt{64}\) mamy
 
 \vspace{0.5em}
 
@@ -987,6 +1007,8 @@ Przeanalizujmy to na powyższym przykładzie -- \(n = 64\) oraz \(2^k = 16\).
 \end{center}
 \end{minipage}
 
+\subsection{Przesunięcia cykliczne o małe \(2^k\)}
+
 Co się dzieje, gdy \(2^k\) jest \textit{małe} (to znaczy \(2^k < m \))? Wtedy zmiany w układzie liczb zachodzą także wewnątrz wierszy. Istotnie -- \(\shift n {2^k}\) możemy wówczas przedstawić jako dwa etapy:
 \begin{enumerate}
     \item \(\shift{m}{2^k}\) wewnątrz każdego wiersza,
@@ -1075,7 +1097,9 @@ Przyjrzyjmy się tym etapom na przykładzie -- niech \(n=64\) oraz \(2^k = 2\).
 \end{center}
 \end{minipage}
 
-\vspace{1em}
+% \vspace{1em}
+
+\subsection{Konstrukcja sieci}
 
 Podsumowując, przesunięcia cykliczne o \(2^k\) realizujemy w następujący sposób:
 
@@ -1102,6 +1126,8 @@ W terminach tak skonstruowanej sieci zrealizowanie przesunięcia cyklicznego o \
     \item gdy \(2^k\) jest małe, aktywujemy blok wierszowy, tak by wykonał \(\shift m {2^k}\) na każdym wierszu, a następnie aktywujemy blok kolumnowy, tak by wykonał \(\shift m 1\) na ostatnich \(2^k\) kolumnach,
     \item gdy \(2^k\) jest duże, aktywujemy sieć \(T_1\), tak by wykonała transpozycję, aktywujemy blok wierszowy, tak by wykonał \(\shift m {2^k/m}\) na każdym wierszu, a na końcu aktywujemy aktywujemy sieć \(T_2\), tak by wykonała transpozycję.
 \end{itemize}
+
+\subsection{Głębokość i rozmiar}
 
 Udało nam się skonstruować sieć realizującą \(\twoshift n\). Zbadajmy teraz jej głębokość i rozmiar.
 
