@@ -71,7 +71,7 @@ Instytut Matematyczny}\\
 \hspace*{6.5cm}dr. hab. Jana Dymary, prof. UWr }\\
 \vfill
 \begin{center}
-{\large Wrocław, 2023 r.}\\
+{\large Wrocław, \the\year{} r.}\\
 \end{center}
 
 % -------------- abstrakt ----------------------
@@ -81,16 +81,15 @@ Instytut Matematyczny}\\
 \null\vfill
 
 \begin{abstract}
-    \todo{streszczenie}
-    % Sieci przełączników bla bla bla
+    W poniższej pracy przedstawiamy definicje przełącznika oraz sieci przełączników. Najpierw pokazujemy konstrukcje sieci realizujących symetrię, przesunięcie cykliczne czy dowolną permutację. Następnie przedstawiamy konstrukcję sieci Beneša--Waksmana realizującą wszystkie permutacje oraz jej optymalizację. Na końcu konstruujemy sieć realizującą wszystkie przesunięcia cykliczne oraz przesunięcia cykliczne o potęgi 2.  
 \end{abstract}
 
 \vfill
 
 
-% -------------- spis treści --------------------
+% % -------------- spis treści --------------------
 
-\newpage
+% \newpage
 
 \tableofcontents
 
@@ -101,7 +100,8 @@ Instytut Matematyczny}\\
 
 \section{Wprowadzenie}
 
-Sieci przełączników to struktury, które można zinterpretować jako urządzenia zbudowane z tzw. \textit{przełączników} pozwalające na permutowanie \(n\) rozróżnialnych sygnałów danych na wejściu. Naturalne jest, że dążymy do optymalizacji struktury sieci pod względem liczby użytych przełączników lub maksymalnej liczby przełączników, przez jakie przepływa sygnał w sieci. Jednakże ze względu na wysoce wyspecjalizowane zastosowania (m. in. sieci telefoniczne, trasowanie pakietów) brakuje źródeł wyczerpująco tłumaczących to zagadnienie w sposób przystępny na przykład dla studenta drugiego roku informatyki. W tej pracy przybliżymy podstawowe definicje (rozdział 2), przedstawimy konstrukcję najsłynniejszej sieci realizującej wszystkie permutacje, czyli sieci Beneša--Waksmana (rozdział 3), sieci realizującej wszystkie przesunięcia cykliczne (rozdział 4) i sieci realizującej przesunięcia cykliczne o potęgi 2 (rozdział 5).  Natomiast w rozdziale 6 przeanalizujemy sieci, w których przełączniki są ustawiane losowo w jeden z dwóch stanów. 
+Sieci przełączników to struktury, które można zinterpretować jako urządzenia zbudowane z tzw. \textit{przełączników} pozwalające na permutowanie \(n\) rozróżnialnych sygnałów danych na wejściu. Naturalne jest, że dążymy do optymalizacji struktury sieci pod względem liczby użytych przełączników lub maksymalnej liczby przełączników, przez jakie przepływa sygnał w sieci. Jednakże ze względu na wysoce wyspecjalizowane zastosowania (m. in. sieci telefoniczne, trasowanie pakietów) brakuje źródeł wyczerpująco tłumaczących to zagadnienie w sposób przystępny na przykład dla studenta drugiego roku informatyki. W tej pracy przybliżymy podstawowe definicje (rozdział 2), przedstawimy konstrukcję najsłynniejszej sieci realizującej wszystkie permutacje, czyli sieci Beneša--Waksmana (rozdział 3), sieci realizującej wszystkie przesunięcia cykliczne (rozdział 4) i sieci realizującej przesunięcia cykliczne o potęgi 2 (rozdział 5).  
+% Natomiast w rozdziale 6 przeanalizujemy sieci, w których przełączniki są ustawiane losowo w jeden z dwóch stanów. 
 
 \vspace{1em}
 
@@ -413,6 +413,38 @@ Ponadto wejścia i wyjścia sieci numerujemy liczbami od \(0\) do \(n-1\).
 \todo{sieć realizująca jakąś małą permutację}
 
 \todo{sieć, która nie może zrealizować jakiejś permutacji}
+\begin{center}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+\clip(-1.,-1.) rectangle (5.,6.);
+\draw [line width=1.pt] (0.,1.)-- (1.,1.);
+\draw [line width=1.pt] (0.,3.)-- (1.,3.);
+\draw [line width=1.pt] (1.,0.)-- (1.,4.);
+\draw [line width=1.pt] (1.,4.)-- (3.,4.);
+\draw [line width=1.pt] (3.,4.)-- (3.,0.);
+\draw [line width=1.pt] (3.,0.)-- (1.,0.);
+\draw [line width=1.pt] (1.,5.)-- (3.,5.);
+\draw [line width=1.pt] (1.,5.)-- (0.,5.);
+\draw [line width=1.pt] (3.,3.)-- (4.,3.);
+\draw [line width=1.pt] (3.,1.)-- (4.,1.);
+\draw [line width=1.pt] (3.,5.)-- (4.,5.);
+\begin{scriptsize}
+\draw[color=black] (0.15,1.226931919759481) node {\large 2};
+\draw[color=black] (0.15,3.223349280287978) node {\large 1};
+\draw[color=black] (0.15,5.219766640816475) node {\large 0};
+\draw[color=black] (3.85,3.239320619172206) node {\large 1};
+\draw[color=black] (3.85,1.194989241991025) node {\large 2};
+\draw[color=black] (3.85,5.187823963048019) node {\large 0};
+\end{scriptsize}
+\end{tikzpicture}
+
+\vspace{-2em}
+
+\begin{minipage}{.5\textwidth}
+    \begin{center}
+         {\it Przykład sieci która nie realizuje permutacji.}
+    \end{center}
+\end{minipage}
+\end{center}
 
 \begin{df}
     Rozmiar sieci to liczba przełączników w sieci.
@@ -543,7 +575,6 @@ Jakie sieci zatem istnieją? W poniższych rozważaniach pochylimy się nad siec
 
 Zaobserwujmy konstrukcję z lematu \ref{lem:perm_symetrie} dla \(n=4\) i \(k=2\).
 
-\todo{rysunek sieci}
 
 \begin{center}
     
@@ -671,7 +702,7 @@ Lemat \ref{lem:perm_symetrie} można jednak uogólnić -- zauważmy, że nie kor
     \[
         \sigma = \sigma_1 \circ \sigma_2 \circ \ldots \circ \sigma_k \td
     \]
-    Prostą konsekwencją lematu \ref{lem:perm_shifty} jest to, że istnieje sieć o głębokości 2, która realizuje \(\id n\) oraz \(\sigma_i\) dla każdego \(i\). Konstrukcja sieci żądanej w tym lemacie polega na złożeniu tych sieci dla każdego \(\sigma_i\). Z rozłączności cykli wynika, że będzie miała ona głębokość równą 2. 
+    Prostą konsekwencją lematu \ref{lem:perm_shifty} jest to, że istnieje sieć o głębokości 2, która realizuje \(\id n\) oraz \(\sigma_i\) dla każdego \(i\). Konstrukcja żądanej sieci polega na złożeniu tych sieci dla każdego \(\sigma_i\). Z rozłączności cykli wynika, że będzie miała ona głębokość równą 2. 
 \end{proof}
 
 
@@ -680,34 +711,54 @@ Lemat \ref{lem:perm_symetrie} można jednak uogólnić -- zauważmy, że nie kor
 
 \section{Sieć Beneša--Waksmana}
 
-\begin{pyt}
-    Czy istnieje sieć realizująca wszystkie permutacje z \(S_n\)?
-\end{pyt}
-Odpowiedź to tak.
-\todo{Przykład jak konstruować nie optymalnie sieci permutacji}
-\begin{pyt}
-    Jaka jest minimalna liczba przełączników żeby zrealizować wszystkie permutacje z \(S_n\)?
-\end{pyt}
+W tym rozdziale będziemy zajmować się siecią, która realizuje wszystkie możliwe permutacje dla ustalonego \(n\). Dla uproszczenia przyjmiemy, że $n = 2^k$ dla pewnego \(k \in \N\).
+%\begin{pyt}
+%    Czy istnieje sieć realizująca wszystkie permutacje z \(S_n\)?
+%\end{pyt}
+%Odpowiedź to tak. 
+%\todo{Przykład jak konstruować nie optymalnie sieci permutacji}
+
+% \vspace{.5em}
+
+\subsection{Ograniczenie dolne}
+
+Najpierw zastanówmy się nad ograniczeniem dolnym -- czy istnieje asymptotyczne oszacowanie minimalnej liczby przełączników potrzebnych do zrealizowania wszystkich permutacji z \(S_n\)?
+ 
+% \begin{pyt}
+%     Jaka jest minimalna liczba przełączników, potrzebnych żeby zrealizować wszystkie permutacje z \(S_n\)?
+% \end{pyt}
 \begin{tw}
-    Żeby zrealizować każdą permutację z \(S_n\) potrzeba sieci o co najmniej \(\Omega(n \log n )\) przełącznikach.
+    Dowolna sieć, która realizuje wszystkie permutacje z \(S_n\), ma  \(\Omega(n \log n )\) przełączników.
 \end{tw}
 \begin{proof}
-Ustalmy n $\in \mathbb{N}$.
-Zauważmy, że przełącznik, co najwyżej, zwiększa ilość realizowanych permutacji dwukrotnie.
-Niech $\sigma$ będzie siecią która realizuje wszystkie \(n!\) permutacji. Niech \(F\) będzie funkcją która sieci przyporządkowuje ilość przełączników która się w niej znajduje.
-Wtedy $log(n!) \leq F(\sigma)$. Ze wzoru Stirlinga z możemy oszacować \(n!\) z dołu przez $(n/e)^n$. Wówczas
+Ustalmy $n \in \mathbb{N}$ i sieć realizującą wszystkie permutacje z \(S_n\). Oznaczmy liczbę przełączników w tej sieci przez \(p\).
+Zauważmy, że każdy przełącznik, zwiększa liczbę realizowanych permutacji co najwyżej dwukrotnie.
+Wobec tego $log(n!) \leq p$. Ze wzoru Stirlinga z możemy oszacować \(n!\) z dołu przez $(n/e)^n$. Otrzymujemy zatem
 \[
     \log (n!) \geq \log ( (n/e)^n ) = n(\log n - \log e) = \Omega(n \log n)
 \]
 \end{proof}
-\begin{pyt}
-    Jak skonstruować taką sieć?
-\end{pyt}
-Dla uproszczenia przyjmiemy, że \(n = 2^k\) dla pewnego \(k \in \mathbb{N}\).
-Konstrukcja polega na podzieleniu problemu na dwa identyczne pod problemy i pomysłowym połączeniu tych dwóch pod problemów w pełne rozwiązanie.
-Na wejściu mamy \(n\) przełączników z każdego ich wyjścia prowadzimy przewód do wejść obu pod sieci o rozmiarze \(n/2\).
-Podobnie na wyjściu mamy \(n\) przełączników i z każdego ich wejścia prowadzimy przewód do wyjść obu podsieci o rozmiarze \(n/2\).
-\todo{Konstrukcja sieci Beneša--Waksmana}
+
+\subsection{Konstrukcja i dowód poprawności}
+
+Konstrukcja polega na podzieleniu problemu na dwa identyczne podproblemy i pomysłowym połączeniu odpowiadających im podsieci w pełne rozwiązanie.
+
+\vspace{.5em}
+
+Ustalmy \(n\). Rekurencyjne konstruujemy dwie identyczne sieci realizujące wszystkie permutacje z \(S_{n/2}\). Jedną z nich nazwijmy \emph{białą}, a drugą \emph{czarną}. 
+
+\vspace{.5em}
+
+Tworzymy warstę wejściową przewodników. Przewody z \(n\) wejść sieci kierujemy do \(n/2\) przewodników w taki sposób, że do \(k\)--tego przełącznika trafiają przewody z wyjść \(2k\) (na wejście 0) oraz \(2k+1\) (na wejście 1) dla \(k = 0, 1, \ldots, n/2 - 1\). Natomiast z przewody z wyjścia 0 i 1 \(k\)--tego przewodnika kierujemy do \(k\)--tego wejścia odpowiednio białej i czarnej podsieci. 
+
+\vspace{.5em}
+
+Analogicznie tworzymy warstwę wyjściową przełączników. Dokładniej kładziemy \(n/2\) przełączników tak, że przewody z wyjścia 0 i 1 \(k\)--tego przewodnika prowadzą odpowiednio do wyjść sieci o numerach \(2k\) i \(2k+1\). Natomiast do wejść 0 i 1 \(k\)--tego przewodnika prowadzimy przewód z \(k\)--tego wyjścia odpowiednio białej i czarnej podsieci. 
+
+\vspace{.5em}
+
+Konstrukcję schematycznie przedstawiono na poniższym rysunku.
+
 \begin{center}
 \begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=0.5cm,y=0.5cm]
 \clip(-2.,-1.) rectangle (11.,12.);
@@ -784,8 +835,8 @@ Podobnie na wyjściu mamy \(n\) przełączników i z każdego ich wejścia prowa
 \draw [line width=1.pt] (9.,1.5)-- (10.,1.5);
 \draw [line width=1.pt] (9.,0.5)-- (10.,0.5);
 
-\draw (3.2,9.5) node[anchor=north west, align=center] {\small Podsieć \\ \small dla n/2};
-\draw (3.2,3.5) node[anchor=north west, align=center] {\small Podsieć \\ \small dla n/2};
+\draw (4.5,8.5) node[align=center] {\small Podsieć \\ \small (biała) \\ \small dla \(n/2\)};
+\draw (4.5,2.5) node[align=center] {\small Podsieć \\ \small (czarna) \\ \small dla \(n/2\)};
 \end{tikzpicture}
 \end{center}
 
@@ -793,65 +844,252 @@ Podobnie na wyjściu mamy \(n\) przełączników i z każdego ich wejścia prowa
 \begin{tw}
     Sieć Beneša--Waksmana realizuje wszystkie permutacje.
 \end{tw}
-\begin{proof}
-    Niech $\pi$ będzie dowolną permutacją z $S_n$. Pokażemy, że istnieje ustawienie przełączników takie, że dane z i tego portu wejściowego zostaną przesłane na $\pi(i)$ port wyjściowy. 
-    Niech $G_\pi = (V, E)$ będzie grafem w którym:
-    \begin{itemize}
-        \item $V = V_i \cup V_o \cup V_m$. Każdy z tych wierzchołków otrzymuje etykietę.
-        \begin{itemize}
-            \item $V_i$ wierzchołki odpowiadające portom wejściowym sieci.
-             Wierzchołek z $V_i$ odpowiadający i-temu portowi wejściowemu otrzymuje etykietę i.
-            \item $V_o$ wierzchołki odpowiadające portom z ostatniej warstwy po dwa na przełącznik. Jeżeli te wierzchołki odpowiadają j-temu przełącznikowi z ostatniej warstwy to otrzymują etykiety $i''$ i $k''$ takie, że $2 - 1 = \pi(i)$ oraz $2j = \pi(k)$.
-            \item $V_m$ dodatkowe wierzchołki które otrzymują etykiety ze zbioru ${1', 2', ..., n'}$
-        \end{itemize}
-        \item $E = E_i \cup E_m \cup E_o$ składa się z:
-        \begin{itemize}
-            \item $n/2$ krawędzi w zbiorze $E_i$ o etykietach $2i-1$ i $2i$, a więc takie które odpowiadają sąsiednim portom wejściowym.
-            \item $n/2$ krawędzi w zbiorze $E_o$ łączący wierzchołki odpowiadające temu samemu przełącznikowi na ostatniej warstwie.
-            \item  $2n$ krawędzi w zbiorze $E_m$ łączących wierzchołki o etykietach $i$ i $i'$ oraz wierzchołki o etykietach $i'$ i $i''$.
-        \end{itemize}
-    \end{itemize} 
-    Tak zdefiniowany graf jest sumą rozłączoną cykli parzystej długości. Jest tak ponieważ stopień każdego wierzchołka jest równy 2 a więc jest sumą rozłącznych cykli. Każdy cykl zawiera parzystą liczbę wierzchołków z $V_i$ i $V_o$ z czego wynika, że zawiera też parzystą liczbę wierzchołków z $V_m$.
-    Wobec tego graf $G_\pi$ jest dwu kolorowalny.
-    W związku z tym takie kolorowanie spełnia:
-    \begin{itemize}
-        \item Wierzchołki odpowiadające sąsiednim portom otrzymują różne kolory.
-        \item Wierzchołki o etykietach $i$ oraz $i''$ otrzymują ten sam kolor
-    \end{itemize}
-    Konsekwencja tego jest, że jeżeli:
-    \begin{itemize}
-        \item Dane z białych portów wejściowych wyślemy do górnej podsieci, a czarne do dolnej. 
-        \item Ustawiamy elementy w górnej i dolnej podsieci tak żeby per-mutowały zgodnie z permutacją $\pi$.
-        \item W ostatniej warstwie dla j-tego przełącznika i odpowiadającej mu etykiecie białego wierzchołka i oraz czarnemu wierzchołkowi, o etykiecie k, na tym samym przełączniku. Stosujemy regułę która mówi: Jeśli $i = \pi(2j - 1)$ oraz $k = \pi(2j)$ to przełącznik jest w stanie nieaktywnym w przeciwnym wypadku jest w stanie aktywnym.
-    \end{itemize}
 
+\begin{proof}
+Przeprowadzimy dowód przez indukcję, korzystając z rekurencyjnej struktury sieci. 
+
+    \begin{enumerate} 
+        \item Podstawa indukcji dla $n = 1$ oraz $n = 2$. \\
+        Dla $n = 1$ sieć Beneša--Waksmana jest prostu przewodem. Z kolei dla $n = 2$ jest to pojedynczy przełącznik.
+
+        \item Krok indukcyjny. Weźmy dowolne $n = 2^k$ dla pewnego $k$ naturalnego i załóżmy, że sieć dla \(n/2\) konstruowana w sposób opisany powyżej realizuje wszystkie permutacje $n/2$--elementowe. 
+        Ustalmy \(\pi \in S_n\).
+        
+        Zauważmy, że wystarczy wskazać podział zbioru \(\{0, 1, \ldots, n-1\}\) na dwa podzbiory \(n/2\)--elementowe (nazwijmy je \emph{białym} i \emph{czarnym}) o następującej własności: dla dowolnego \(k = 0, 1, \ldots, n/2 - 1\) liczby \(2k\) i \(2k+1\) należą do różnych zbiorów podziału oraz analogicznie liczby \(\pi(2k)\) i \(\pi(2k+1)\) należą do różnych zbiorów podziału.
+
+        \vspace{.5em}
+
+        Istotnie -- zakładając, że istnieje taki podział, ustawienie przełączników realizujące \(\pi\) wygląda następująco: 
+
+        \begin{itemize}
+            \item jeśli \(2k\) jest w białym zbiorze, a \(2k+1\) w czarnym, to \(k\)--temu przełącznikowi z warstwy wejściowej nadajemy stan nieaktywny,
+            \item w przeciwnym przypadku \(k\)--temu przełącznikowi z warstwy wyjściowej nadajemy stan aktywny.  
+        \end{itemize}
+        dla \(k = 0, 1, \ldots, n/2-1\). Analogicznie nadajemy stan \(k\)--temu przełącznikowi na wyjściu:
+        \begin{itemize}
+            \item jeśli \(\pi(2k)\) jest w białym zbiorze, a \(\pi(2k+1)\) w czarnym, to \(k\)--temu przełącznikowi nadajemy stan nieaktywny,
+            \item w przeciwnym przypadku \(k\)--temu przełącznikowi nadajemy stan aktywny.  
+        \end{itemize}
+
+        Natomiast o właściwe ustawienie liczb wewnątrz \emph{białego} i \emph{czarnego} zbioru ,,zadbają'' rekurencyjnie skonstruowane sieci.
+
+        \vspace{.1em}
+
+        Stwórzmy zatem podział spełniający powyższe warunki. 
+
+        \vspace{.1em}
+        
+        % Niech $V = V_i \cup V_m $ będzie zbiorem wierzchołków.
+        Niech \(V_i = \{ 0, 1, \ldots, n-1 \}\) będzie zbiorem wierzchołków odpowiadających portom wejściowym sieci (\(j\)--ty port wejściowy  utożsamiamy z wierzchołkiem \(j\)). Łączymy ze sobą wierzchołki, które odpowiadają wejściom tego samego przełącznika z warstwy wejściowej. Dokładniej łączymy krawędzią  wierzchołki $0$ i $1$, $2$ i $3$, ... , $n-2$ i $n-1$. 
+
+        \vspace{.1em}
+        Niech $V_o = \{0', 1', \ldots, (n-1)'\}$ będzie zbiorem wierzchołków, które odpowiadają portom wyjściowym sieci (\(j\)--ty port wyjściowy utożsamiamy z \(k'\), takim że \(\pi(j) = k\)). Łączymy krawędzią te, które są ze sobą w jednym przełączniku w warstwie wyjściowej (czyli \(\pi(2j)'\) oraz \(\pi(2j+1)'\) dla \(j = 0, 1, \ldots, n/2 - 1\)). 
+
+        
+        Ponadto łączymy krawędzią wierzchołki o etykietach $j$ oraz $j'$.
+
+        Poniżej przedstawiamy schematyczny graf dla \(n = 8\) oraz 
+        \[
+            \pi = \begin{pmatrix}
+                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+                3 & 7 & 0 & 1 & 4 & 5 & 2 & 6
+              \end{pmatrix}.
+        \]
+
+\begin{center}
+        \begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=0.5cm,y=0.5cm]
+\clip(-1.,-1.) rectangle (17.,31.);
+\draw [line width=1.pt] (0.,0.)-- (4.,0.);
+\draw [line width=1.pt] (4.,0.)-- (4.,6.);
+\draw [line width=1.pt] (4.,6.)-- (0.,6.);
+\draw [line width=1.pt] (0.,6.)-- (0.,0.);
+\draw [line width=1.pt] (0.,8.)-- (4.,8.);
+\draw [line width=1.pt] (4.,8.)-- (4.,14.);
+\draw [line width=1.pt] (4.,14.)-- (0.,14.);
+\draw [line width=1.pt] (0.,14.)-- (0.,8.);
+\draw [line width=1.pt] (0.,16.)-- (4.,16.);
+\draw [line width=1.pt] (4.,16.)-- (4.,22.);
+\draw [line width=1.pt] (4.,22.)-- (0.,22.);
+\draw [line width=1.pt] (0.,22.)-- (0.,16.);
+\draw [line width=1.pt] (0.,24.)-- (4.,24.);
+\draw [line width=1.pt] (4.,24.)-- (4.,30.);
+\draw [line width=1.pt] (4.,30.)-- (0.,30.);
+\draw [line width=1.pt] (0.,30.)-- (0.,24.);
+\draw [line width=1.pt] (12.,30.)-- (16.,30.);
+\draw [line width=1.pt] (16.,30.)-- (16.,24.);
+\draw [line width=1.pt] (16.,24.)-- (12.,24.);
+\draw [line width=1.pt] (12.,24.)-- (12.,30.);
+\draw [line width=1.pt] (12.,22.)-- (16.,22.);
+\draw [line width=1.pt] (16.,22.)-- (16.,16.);
+\draw [line width=1.pt] (16.,16.)-- (12.,16.);
+\draw [line width=1.pt] (12.,16.)-- (12.,22.);
+\draw [line width=1.pt] (12.,14.)-- (16.,14.);
+\draw [line width=1.pt] (16.,14.)-- (16.,8.);
+\draw [line width=1.pt] (16.,8.)-- (12.,8.);
+\draw [line width=1.pt] (12.,8.)-- (12.,14.);
+\draw [line width=1.pt] (12.,6.)-- (16.,6.);
+\draw [line width=1.pt] (16.,6.)-- (16.,0.);
+\draw [line width=1.pt] (16.,0.)-- (12.,0.);
+\draw [line width=1.pt] (12.,0.)-- (12.,6.);
+\draw [line width=1.pt] (4.,28.5)-- (12.,20.5);
+\draw [line width=1.pt] (4.,25.480146267130415)-- (12.,17.5);
+\draw [line width=1.pt] (4.,17.5)-- (12.,28.5);
+\draw [line width=1.pt] (12.,25.5)-- (4.,1.5);
+\draw [line width=1.pt] (4.,4.5)-- (12.,1.5);
+\draw [line width=1.pt] (12.,4.5)-- (4.,20.5);
+\draw [line width=1.pt] (4.,12.5)-- (12.,12.5);
+\draw [line width=1.pt] (4.,9.5)-- (12.,9.5);
+\draw [line width=1.pt] (1.,29.5)-- (1.,27.5);
+\draw [line width=1.pt] (1.,27.5)-- (3.,27.5);
+\draw [line width=1.pt] (3.,27.5)-- (3.,29.5);
+\draw [line width=1.pt] (3.,29.5)-- (1.,29.5);
+\draw [line width=1.pt] (1.,26.5)-- (3.,26.5);
+\draw [line width=1.pt] (3.,24.5)-- (3.,26.5);
+\draw [line width=1.pt] (3.,24.5)-- (1.,24.5);
+\draw [line width=1.pt] (1.,24.5)-- (1.,26.5);
+\draw [line width=1.pt] (4.,28.5)-- (3.,28.5);
+\draw [line width=1.pt] (3.,25.501229087688593)-- (4.,25.480146267130415);
+\draw [line width=1.pt] (2.,27.5)-- (1.9995868314540757,26.5);
+\draw [line width=1.pt] (13.,16.5)-- (15.,16.5);
+\draw [line width=1.pt] (15.,16.5)-- (15.,18.5);
+\draw [line width=1.pt] (15.,18.5)-- (13.,18.5);
+\draw [line width=1.pt] (13.,18.5)-- (13.,16.5);
+\draw [line width=1.pt] (13.,21.5)-- (13.,19.5);
+\draw [line width=1.pt] (13.,19.5)-- (15.,19.5);
+\draw [line width=1.pt] (15.,19.5)-- (15.,21.5);
+\draw [line width=1.pt] (15.,21.5)-- (13.,21.5);
+\draw [line width=1.pt] (14.,19.5)-- (14.,18.5);
+\draw [line width=1.pt] (12.,20.5)-- (13.,20.5);
+\draw [line width=1.pt] (13.,17.5)-- (12.,17.5);
+\draw [line width=1.pt] (13.,29.5)-- (15.,29.5);
+\draw [line width=1.pt] (15.,29.5)-- (15.,27.5);
+\draw [line width=1.pt] (15.,27.5)-- (13.,27.5);
+\draw [line width=1.pt] (13.,27.5)-- (13.,29.5);
+\draw [line width=1.pt] (13.,26.5)-- (15.,26.5);
+\draw [line width=1.pt] (15.,26.5)-- (15.,24.5);
+\draw [line width=1.pt] (15.,24.5)-- (13.,24.5);
+\draw [line width=1.pt] (13.,24.5)-- (13.,26.5);
+\draw [line width=1.pt] (12.,28.5)-- (13.,28.5);
+\draw [line width=1.pt] (14.,27.5)-- (14.,26.5);
+\draw [line width=1.pt] (13.,25.5)-- (12.,25.5);
+\draw [line width=1.pt] (1.,21.5)-- (3.,21.5);
+\draw [line width=1.pt] (3.,21.5)-- (3.,19.5);
+\draw [line width=1.pt] (3.,19.5)-- (1.,19.5);
+\draw [line width=1.pt] (1.,19.5)-- (1.,21.5);
+\draw [line width=1.pt] (1.,16.5)-- (3.,16.5);
+\draw [line width=1.pt] (3.,16.5)-- (3.,18.5);
+\draw [line width=1.pt] (3.,18.5)-- (1.,18.5);
+\draw [line width=1.pt] (1.,18.5)-- (1.,16.5);
+\draw [line width=1.pt] (4.,17.5)-- (3.,17.5);
+\draw [line width=1.pt] (2.,18.5)-- (2.,19.5);
+\draw [line width=1.pt] (3.,20.5)-- (4.,20.5);
+\draw [line width=1.pt] (13.,5.5)-- (15.,5.5);
+\draw [line width=1.pt] (15.,5.5)-- (15.,3.5);
+\draw [line width=1.pt] (15.,3.5)-- (13.,3.5);
+\draw [line width=1.pt] (13.,3.5)-- (13.,5.5);
+\draw [line width=1.pt] (12.,4.5)-- (13.,4.5);
+\draw [line width=1.pt] (13.,2.5)-- (15.,2.5);
+\draw [line width=1.pt] (15.,2.5)-- (15.,0.5);
+\draw [line width=1.pt] (15.,0.5)-- (13.,0.5);
+\draw [line width=1.pt] (13.,0.5)-- (13.,2.5);
+\draw [line width=1.pt] (12.,1.5)-- (13.,1.5);
+\draw [line width=1.pt] (14.,2.5)-- (14.,3.5);
+\draw [line width=1.pt] (1.,5.5)-- (3.,5.5);
+\draw [line width=1.pt] (3.,5.5)-- (3.,3.5);
+\draw [line width=1.pt] (3.,3.5)-- (1.,3.5);
+\draw [line width=1.pt] (1.,3.5)-- (1.,5.5);
+\draw [line width=1.pt] (4.,4.5)-- (3.,4.5);
+\draw [line width=1.pt] (1.,2.5)-- (3.,2.5);
+\draw [line width=1.pt] (3.,2.5)-- (3.,0.5);
+\draw [line width=1.pt] (3.,0.5)-- (1.,0.5);
+\draw [line width=1.pt] (1.,0.5)-- (1.,2.5);
+\draw [line width=1.pt] (2.,3.5)-- (2.,2.5);
+\draw [line width=1.pt] (4.,1.5)-- (3.,1.5);
+\draw [line width=1.pt] (1.,13.5)-- (3.,13.5);
+\draw [line width=1.pt] (3.,13.5)-- (3.,11.5);
+\draw [line width=1.pt] (3.,11.5)-- (1.,11.5);
+\draw [line width=1.pt] (1.,11.5)-- (1.,13.5);
+\draw [line width=1.pt] (1.,10.5)-- (3.,10.5);
+\draw [line width=1.pt] (3.,10.5)-- (3.,8.5);
+\draw [line width=1.pt] (3.,8.5)-- (1.,8.5);
+\draw [line width=1.pt] (1.,8.5)-- (1.,10.5);
+\draw [line width=1.pt] (4.,12.5)-- (3.,12.5);
+\draw [line width=1.pt] (2.,11.5)-- (2.,10.5);
+\draw [line width=1.pt] (3.,9.5)-- (4.,9.5);
+\draw [line width=1.pt] (13.,13.5)-- (13.,11.5);
+\draw [line width=1.pt] (13.,11.5)-- (15.,11.5);
+\draw [line width=1.pt] (15.,11.5)-- (15.,13.5);
+\draw [line width=1.pt] (15.,13.5)-- (13.,13.5);
+\draw [line width=1.pt] (13.,10.5)-- (13.,8.5);
+\draw [line width=1.pt] (13.,8.5)-- (15.,8.5);
+\draw [line width=1.pt] (15.,8.5)-- (15.,10.5);
+\draw [line width=1.pt] (15.,10.5)-- (13.,10.5);
+\draw [line width=1.pt] (14.,10.5)-- (14.,11.5);
+\draw [line width=1.pt] (12.,12.5)-- (13.,12.5);
+\draw [line width=1.pt] (12.,9.5)-- (13.,9.5);
+\draw (1.6, 29) node[anchor=north west] {0};
+\draw (1.6, 26) node[anchor=north west] {1};
+\draw (1.6, 21) node[anchor=north west] {2};
+\draw (1.6, 18) node[anchor=north west] {3};
+\draw (1.6, 13) node[anchor=north west] {4};
+\draw (1.6, 10) node[anchor=north west] {5};
+\draw (1.6, 5) node[anchor=north west] {6};
+\draw (1.6, 2) node[anchor=north west] {7};
+\draw (13.6,21) node[anchor=north west] {0};
+\draw (13.6,18) node[anchor=north west] {1};
+\draw (13.6,13) node[anchor=north west] {4};
+\draw (13.6,10) node[anchor=north west] {5};
+\draw (13.6,2) node[anchor=north west] {6};
+\draw (13.6,26) node[anchor=north west] {7};
+\draw (13.6,29) node[anchor=north west] {3};
+\draw (13.6,5) node[anchor=north west] {2};
+
+\end{tikzpicture}
+\end{center}
+
+        
+        Zauważmy teraz, że w tak powstałym grafie każdy wierzchołek ma stopień dokładnie 2. W związku z tym graf ten jest sumą cykli. Ponadto każdy cykl ma parzystą długość -- jeśli pewien wierzchołek należy do cyklu, to należy do niego także jego ,,sąsiad'' z przełącznika. 
+
+        \vspace{.5em}
+
+        Wobec tego graf stworzony opisanymi wyżej regułami jest dwukolorowalny. Ustalmy zatem pewne kolorowanie na kolor \emph{biały} i \emph{czarny}. Otrzymujemy w ten sposób podział wierzchołków z \(V_i\) na zbiór wierzchołków \emph{białych} i \emph{czarnych}. Jest to podział spełniający wymagania opisane wyżej. Istotnie: dla każdego \(j = 0, 1, \ldots, n/2 - 1\) dzięki krawędziom pomiędzy wierzchołkami z \(V_i\) zapewniamy, że liczby \(2j\) oraz \(2j+1\) należą do różnych zbiorów podziału, natomiast dzięki krawędziom pomiędzy wierzchołkami z \(V_o\) zapewniamy, że \(\pi(2j)\) oraz \(\pi(2j+1)\) należą do różnych zbiorów podziału.
+        
+        \vspace{.5em}
+
+        Zatem permutacja \(\pi\) może być zrealizowana przez sieć Beneša--Waksmana. 
+    \end{enumerate}
 \end{proof}
 \todo{obrazek do dwukolorowania}
 \todo{Przykład małej sieci}
 
-\begin{pyt}
-    Czy da się lepiej?
-\end{pyt}
-Tak. Można usunąć po jednym przełączniku na każdym poziomie sieci.
-\begin{proof}
-    Zauważmy, że jeżeli ustalimy kolor jednego z wierzchołków odpowiadającym portom wyjściowym to jednoznacznie ustalimy całe dwu kolorowanie. Wtedy możemy usunąć przełącznik na którym ustawiliśmy kolor. Ponieważ w białej podsieci istnieje tak ustawienie przełączników, która odpowiada permutacji białych przełączników. 
-\end{proof}
+\subsection{Optymalizacja}
+
+Zauważmy, że można usunąć po jednym przełączniku na każdym rekurencyjnym poziomie sieci. Istotnie, w dowodzie powyżej ustaliliśmy \emph{dowolne} dwukolorowanie skonstruowanego grafu. Możemy jednak narzucić kolor wierzchołków w jednym przełączniku z wartswy wejściowej lub wyjściowej, np. ustalamy, że \(0 \in V_i\) ma kolor \emph{biały} oraz \(1 \in V_i\) ma kolor \emph{czarny}. Wówczas nie potrzebujemy zerowego przełącznika w warstwie wejściowej, gdyż możemy po prostu poprowadzić przewód z zerowego wejścia sieci do \emph{białej} podsieci oraz ten z pierwszego wejścia sieci do \emph{czarnej} podsieci. 
 
 % --- Sieć realizująca wszystkie przesunięcia cykliczne ---
 
 \section{Sieć realizująca wszystkie przesunięcia cykliczne}
-W tym rozdziale opiszemy sieci, które realizują dowolne przesuniecie cykliczne.
 
-\begin{fa}
+Zastanówmy się teraz nad konstrukcją sieci, które realizują dowolne przesuniecie cykliczne. Dokładniej dla ustalonego \(n \in \N\) chcemy stworzyć sieć realizującą \(\lt\{ \shift n 0, \shift n 1, \ldots, \shift n {n-1} \rt\}\).
+
+\begin{fa}\label{fa:zlozenie_shift}
     Dla dowolnych \(n, a, b \in \N\) zachodzi
     \[
     \shift n a \circ \shift n b = \shift n {a+b} \td
     \]
 \end{fa}
 
+\subsection{Konstrukcja i poprawność}
 
-Zauważmy, że żeby zrealizować przesunięcie cykliczne o $k$ wystarczy złożyć sieci realizujące przesunięcia o każdą potęgę dwójki.
-Rozważmy zapis binarny liczby $k$. Jeżeli na $i$--tej pozycji  występuje $1$, to włączamy sieć, która realizuje przesunięcie cykliczne o $2^i$. Dzięki lematowi \ref{lem:perm_shifty} wiemy, jak stworzyć sieć, która realizuje przesunięcie cykliczne i identyczność i właśnie takiej potrzebujemy. Każda z tych sieci ma $O(n)$ przełączników. My potrzebujmy $\log n$ takich sieci więc nasza sieć będzie miała $O(n \log n)$ przełączników.
+Skonstruujmy sieć w następujący sposób: złóżmy ze sobą sieci realizujące \({\shift n {2^0}, \shift n {2^1}, \ldots,}\) \(\shift n {2^k}\) dla \(k\), takiego że \(2^k < n\) (sieci z lematu \ref{lem:perm_shifty}). 
+
+\vspace{.5em}
+
+Ustalmy teraz \(j \in \lt\{ 0, 1, \ldots, n-1 \rt\}\). Aby zrealizować \(\shift n j\) należy aktywować sieci realizujące \(\shift n {2^l}\), takie że na \(l\)--tej pozycji w zapisie binarnym \(j\) występuje jedynka. Z  faktu \ref{fa:zlozenie_shift} wynika, że w ten sposób zrealizujemy \(\shift n j\). 
+
+\subsection{Rozmiar i głębokość}
+
+Zauważmy, że stwarzamy \(\Theta(\log n)\) podsieci, a każda z nich ma rozmiar  \(\floor{\frac n 2}\) i głębokość 1. Wobec tego rozmiar skonstruowanej sieci wynosi \(\Theta(n \log n)\), a głębokość \(\Theta(\log n)\).
 
 \todo{Zrobić rysunek tej sieci}
 
@@ -1198,11 +1436,11 @@ Udało nam się skonstruować sieć realizującą \(\twoshift n\). Zbadajmy tera
 \end{proof}
 
 
-% ------------------ Co dalej? -------------------
+% % ------------------ Co dalej? -------------------
 
-\section{Co dalej?}
+% \section{Co dalej?}
 
-Losowe ustawianie przełączników -- analiza probabilistyczna. 
+% Losowe ustawianie przełączników -- analiza probabilistyczna. 
 
 % ------------- bibliografia ----------------------
 
