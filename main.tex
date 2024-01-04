@@ -163,7 +163,6 @@ Zacznijmy od najistotniejszej dla tej pracy kwestii -- czyli definicji przełąc
     \item  aktywnym -- sygnał z wejścia \(i\) trafia do wyjścia \((i+1) \mod 2\) (dla \(i \in \{0,1\}\)).
 \end{itemize}
 
-% \todo{rysunek przełącznika w dwóch stanach}
 \begin{center}
     \begin{minipage}{.5\textwidth} %
         \begin{center}
@@ -658,11 +657,10 @@ Jakie sieci zatem istnieją? W poniższych rozważaniach pochylimy się nad siec
     Ponadto jeśli wszystkie przełączniki są w stanie nieaktywnym, sieć realizuje \(\id n\), natomiast jeśli wszystkie są w stanie aktywnym, to realizuje \(\sym n k\).
 \end{proof}
 
-Zaobserwujmy konstrukcję z lematu \ref{lem:perm_symetrie} dla \(n=4\) i \(k=2\).
-
 
 \begin{center}
     
+\todo{Poprawić rysunek -- sym \(n=4\), \(k=2\)}
 
 \begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=0.5cm,y=0.5cm]
 \clip(-7.,-1.) rectangle (10.,15.);
@@ -710,6 +708,8 @@ Zaobserwujmy konstrukcję z lematu \ref{lem:perm_symetrie} dla \(n=4\) i \(k=2\)
 % \draw[color=black] (-5.5,0) node {\large 3 \par};
 % \end{scriptsize}
 \end{tikzpicture}
+
+{\it  Konstrukcja z lematu \ref{lem:perm_symetrie} dla \(n=4\) i \(k=2\)}
 \end{center}
 
 Lemat \ref{lem:perm_symetrie} można jednak uogólnić -- zauważmy, że nie korzystamy z żadnych własności symetrii, poza tym, że \( \sym n k \circ \sym n k = \id n \).
@@ -734,50 +734,10 @@ Lemat \ref{lem:perm_symetrie} można jednak uogólnić -- zauważmy, że nie kor
     dla każdego \(i \in \{0, 1, \ldots, n-1\}\). Wobec tego \(\shift n k = \sym n k \circ \sym n 0\). Stwórzmy zatem sieć przełączników o dwóch warstwach -- pierwsza z nich niech będzie siecią realizującą \(\id n\) i \(\sym n 0\), a druga siecią realizującą \(\id n\) i  \(\sym n k\) (jak w lemacie \ref{lem:perm_symetrie}). Taka sieć ma głębokość 2. Jeśli wszystkie przełączniki są nieaktywne, to realizuje \(\id n\), natomiast jeśli wszystkie są aktywne, to z powyższego rachunku wynika, że realizuje \(\shift n k\).
 \end{proof}
 
-\todo{przykład konstrukcji}
-\begin{center}
-\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=0.5cm,y=0.5cm]
-\draw [line width=1.pt] (0.,0.)-- (4.,0.);
-\draw [line width=1.pt] (4.,0.)-- (4.,6.);
-\draw [line width=1.pt] (4.,6.)-- (0.,6.);
-\draw [line width=1.pt] (0.,6.)-- (0.,0.);
-\draw [line width=1.pt] (0.,8.)-- (4.,8.);
-\draw [line width=1.pt] (4.,8.)-- (4.,14.);
-\draw [line width=1.pt] (4.,14.)-- (0.,14.);
-\draw [line width=1.pt] (0.,14.)-- (0.,8.);
-\draw [line width=1.pt] (0.,13.)-- (-1.,13.);
-\draw [line width=1.pt] (0.,1.)-- (-1.,1.);
-\draw [line width=1.pt] (-9.,9.)-- (-8.,9.);
-\draw [line width=1.pt] (4.,13.)-- (9.,13.);
-\draw [line width=1.pt] (4.,9.)-- (8.,5.);
-\draw [line width=1.pt] (8.,5.)-- (9.,5.);
-\draw [line width=1.pt] (4.,5.)-- (8.,9.);
-\draw [line width=1.pt] (8.,9.)-- (9.,9.);
-\draw [line width=1.pt] (4.,1.)-- (9.,1.);
-\draw [line width=1.pt] (-6.,13.)-- (-5.,13.);
-\draw [line width=1.pt] (-5.,13.)-- (-1.,13.);
-\draw [line width=1.pt] (-9.,5.)-- (-8.,5.);
-\draw [line width=1.pt] (-6.,1.)-- (-5.,1.);
-\draw [line width=1.pt] (-5.,1.)-- (-1.,1.);
-\draw [line width=1.pt] (-6.,4.)-- (-2.,4.);
-\draw [line width=1.pt] (-2.,4.)-- (-2.,10.);
-\draw [line width=1.pt] (-2.,10.)-- (-6.,10.);
-\draw [line width=1.pt] (-6.,10.)-- (-6.,4.);
-\draw [line width=1.pt] (-2.,9.)-- (0.,9.);
-\draw [line width=1.pt] (-2.,5.)-- (0.,5.);
-\draw [line width=1.pt] (-8.,9.)-- (-6.,9.);
-\draw [line width=1.pt] (-8.,5.)-- (-6.,5.);
-\begin{scriptsize}
-\draw[color=black] (-5.5,12) node {\large 0 \par};
-\draw[color=black] (-8.5,8) node {\large 1 \par};
-\draw[color=black] (-8.5,4) node {\large 2 \par};
-\draw[color=black] (-5.55,0) node {\large 3 \par};
-\end{scriptsize}
-\end{tikzpicture}
-\end{center}
+\todo{Poprawić rysunek -- shift \(n=4\), \(k=2\)}
 
 \begin{center}
-    \begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=0.5cm,y=0.5cm]
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=0.5cm,y=0.5cm]
 \clip(-1.,-1.) rectangle (21.,13.);
 \draw [line width=1.pt] (0.,1.)-- (4.,1.);
 \draw [line width=1.pt] (0.,5.)-- (4.,5.);
@@ -803,13 +763,23 @@ Lemat \ref{lem:perm_symetrie} można jednak uogólnić -- zauważmy, że nie kor
 \draw [line width=1.pt] (15.,0.)-- (15.,5.);
 \draw [line width=1.pt] (0.,11.)-- (15.,11.);
 \draw [line width=1.pt] (18.,11.)-- (20.,11.);
-\draw [line width=1.pt] (18.,8.)-- (20.,8.);
-\draw [line width=1.pt] (18.,4.)-- (20.,4.);
+\draw [line width=1.pt] (18.,8.)-- (19.,4.);
+\draw [line width=1.pt] (18.,4.)-- (19.,8.);
 \draw [line width=1.pt] (18.,1.)-- (20.,1.);
+\draw [line width=1.pt] (19.,8.)-- (20.,8.);
+\draw [line width=1.pt] (19.,4.)-- (20.,4.);
+\draw (0,12) node[anchor=north west] {0};
+\draw (0,9) node[anchor=north west] {1};
+\draw (0,6) node[anchor=north west] {2};
+\draw (0,2) node[anchor=north west] {3};
+\draw (19,12) node[anchor=north west] {0};
+\draw (19,9) node[anchor=north west] {1};
+\draw (19,5) node[anchor=north west] {2};
+\draw (19,2) node[anchor=north west] {3};
 \end{tikzpicture}
-\end{center}
 
-\todo{poprawić!}
+{\it Konstrukcja z lematu \ref{lem:perm_shifty} dla \(n=4\) i \(k=2\)}
+\end{center}
 
 \begin{lem}
     Dla dowolnego \(n\) oraz \(\sigma \in S_n\) istnieje sieć o  \(n\) wejściach i \(n\) wyjściach o głębokości 2 realizująca \(\id n\) i \(\sigma\).
@@ -1358,6 +1328,63 @@ Zastanówmy się teraz nad konstrukcją sieci, które realizują dowolne przesun
 
 Skonstruujmy sieć w następujący sposób: złóżmy ze sobą sieci realizujące \({\shift n {2^0}, \shift n {2^1}, \ldots,}\) \(\shift n {2^k}\) dla \(k\), takiego że \(2^k < n\) (sieci z lematu \ref{lem:perm_shifty}). 
 
+\begin{center}
+    \begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=0.5cm,y=0.5cm]
+    \clip(-1.,-1.) rectangle (16.,11.);
+    \draw [line width=1.pt] (1.,0.)-- (4.,0.);
+    \draw [line width=1.pt] (4.,0.)-- (4.,10.);
+    \draw [line width=1.pt] (4.,10.)-- (1.,10.);
+    \draw [line width=1.pt] (1.,10.)-- (1.,0.);
+    \draw [line width=1.pt] (0.,9.)-- (1.,9.);
+    \draw [line width=1.pt] (1.,7.)-- (0.,7.);
+    \draw [line width=1.pt] (1.,5.)-- (0.,5.);
+    \draw [line width=1.pt] (1.,3.)-- (0.,3.);
+    \draw [line width=1.pt] (1.,1.)-- (0.,1.);
+    \draw [line width=1.pt] (6.,10.)-- (6.,0.);
+    \draw [line width=1.pt] (6.,0.)-- (9.,0.);
+    \draw [line width=1.pt] (6.,10.)-- (9.,10.);
+    \draw [line width=1.pt] (9.,10.)-- (9.,0.);
+    \draw [line width=1.pt] (11.,10.)-- (14.,10.);
+    \draw [line width=1.pt] (11.,10.)-- (11.,0.);
+    \draw [line width=1.pt] (11.,0.)-- (14.,0.);
+    \draw [line width=1.pt] (14.,0.)-- (14.,10.);
+    \draw [line width=1.pt] (4.,9.)-- (6.,9.);
+    \draw [line width=1.pt] (4.,7.)-- (6.,7.);
+    \draw [line width=1.pt] (4.,5.)-- (6.,5.);
+    \draw [line width=1.pt] (4.,3.)-- (6.,3.);
+    \draw [line width=1.pt] (4.,1.)-- (6.,1.);
+    \draw [line width=1.pt] (9.,9.)-- (11.,9.);
+    \draw [line width=1.pt] (9.,7.)-- (11.,7.);
+    \draw [line width=1.pt] (9.,5.)-- (11.,5.);
+    \draw [line width=1.pt] (9.,3.)-- (11.,3.);
+    \draw [line width=1.pt] (9.,1.)-- (11.,1.);
+    \draw (1.5, 6) node[anchor=north west] {$\shift 5 {2^0}$};
+    \draw (6.5, 6) node[anchor=north west] {$\shift 5 {2^1}$};
+    \draw (11.5,6) node[anchor=north west] {$\shift 5 {2^2}$};
+    \draw [line width=1.pt] (14.,9.)-- (15.,9.);
+    \draw [line width=1.pt] (14.,7.)-- (15.,7.);
+    \draw [line width=1.pt] (14.,5.)-- (15.,5.);
+    \draw [line width=1.pt] (14.,3.)-- (15.,3.);
+    \draw [line width=1.pt] (14.,1.)-- (15.,1.);
+    \draw (0, 10) node[anchor=north west] {0};
+    \draw (0, 8)  node[anchor=north west] {1};
+    \draw (0, 6)  node[anchor=north west] {2};
+    \draw (0, 4)  node[anchor=north west] {3};
+    \draw (0, 2)  node[anchor=north west] {4};
+    \draw (14.25, 10) node[anchor=north west] {0};
+    \draw (14.25, 8)  node[anchor=north west] {1};
+    \draw (14.25, 6)  node[anchor=north west] {2};
+    \draw (14.25, 4)  node[anchor=north west] {3};
+    \draw (14.25, 2)  node[anchor=north west] {4};
+    \end{tikzpicture}
+    
+    \begin{minipage}{0.5\textwidth}
+        \begin{center}
+            {\it Schemat sieci realizującej wszystkie przesunięcia cykliczne zbioru 5-elementowego}
+        \end{center}
+    \end{minipage}
+    \end{center}
+
 \vspace{.5em}
 
 Ustalmy teraz \(j \in \lt\{ 0, 1, \ldots, n-1 \rt\}\). Aby zrealizować \(\shift n j\) należy aktywować sieci realizujące \(\shift n {2^l}\), takie że na \(l\)--tej pozycji w zapisie binarnym \(j\) występuje jedynka. Z  faktu \ref{fa:zlozenie_shift} wynika, że w ten sposób zrealizujemy \(\shift n j\). 
@@ -1365,8 +1392,6 @@ Ustalmy teraz \(j \in \lt\{ 0, 1, \ldots, n-1 \rt\}\). Aby zrealizować \(\shift
 \subsection{Rozmiar i głębokość}
 
 Zauważmy, że stwarzamy \(\Theta(\log n)\) podsieci, a każda z nich ma rozmiar  \(\floor{\frac n 2}\) i głębokość 1. Wobec tego rozmiar skonstruowanej sieci wynosi \(\Theta(n \log n)\), a głębokość \(\Theta(\log n)\).
-
-\todo{Zrobić rysunek tej sieci}
 
 % -- Sieć realizująca przesunięcia cykliczne o potęgi 2 ---
 
