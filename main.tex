@@ -109,19 +109,13 @@ Zastrzegamy jednak, że za względu na cel pracy, polegający na przystępnym pr
 
 \vspace{1em}
 
-Przez \(S_n\) będziemy oznaczać zbiór wszystkich permutacji \(\{0, 1, \ldots, n-1\}\), przez
-\[
-\shift{n}{k} : \{0, 1, \ldots, n-1\} \to \{0, 1, \ldots, n-1\} 
-\]
-permutację \(\shift{n}{k}(i) = (k+i) \mod n\), a przez
-\[
-\sym{n}{k} : \{0, 1, \ldots, n-1\} \to \{0, 1, \ldots, n-1\} 
-\]
-permutację \(\sym{n}{k}(i) = (k-i) \mod n\), natomiast przez 
-\[
-\id{n} : \{0, 1, \ldots, n-1\} \to \{0, 1, \ldots, n-1\} 
-\]
-permutację identycznościową. 
+Przez \(S_n\) będziemy oznaczać zbiór wszystkich permutacji \(\{0, 1, \ldots, n-1\}\). Ponadto będziemy stosować oznaczenia:
+
+\begin{itemize}
+    \item \(\shift{n}{k} \in S_n\), takie że \(\shift{n}{k}(i) = (k+i) \mod n\),
+    \item \(\sym{n}{k} \in S_n\), takie że \( \sym{n}{k}(i) = (k-i) \mod n \), 
+    \item \(\id{n} \in S_n\), takie że \(\id n (i) = i \).
+\end{itemize}
 
 \vspace{1em}
 
@@ -537,7 +531,7 @@ Natomiast kolejna sieć przy żadnym ustawieniu przełączników nie jest w stan
 \begin{df}
     Mówimy, że sieć przełączników o \(n\) wejściach i \(n\) wyjściach ma głębokość równą \(d \in \N\), gdy 
     \begin{itemize}
-        \item  dla dowolnego przypisania przełącznikom w stanów aktywny/nieaktywny i dowolnego \(i \in \lt\{ 0, 1, \ldots, n-1 \rt\} \) sygnał z wejścia \(i\)--tego przechodzi przez co najwyżej \(d\) przełączników oraz 
+        \item  dla dowolnego przypisania przełącznikom stanów aktywny/nieaktywny i dowolnego \(i \in \lt\{ 0, 1, \ldots, n-1 \rt\} \) sygnał z wejścia \(i\)-tego przechodzi przez co najwyżej \(d\) przełączników oraz 
         \item \(d\) jest najmniejszą liczbą o tej własności.
     \end{itemize}
 \end{df}
@@ -651,7 +645,7 @@ Jakie sieci zatem istnieją? W poniższych rozważaniach pochylimy się nad siec
     Wobec tego permutacja \(\sym n k\) jest inwolucją, a co za tym idzie -- składa się z cykli o rozmiarze co najwyżej 2. Konstrukcja sieci wygląda następująco:
     \begin{itemize}
         \item każdemu cyklowi postaci \((i,j)\) przypisujemy przełącznik, który na wejściach przyjmuje sygnały \(i\) oraz \(j\) z wejścia sieci, a przewody na jego wyjściach prowadzą do wyjść sieci o numerach \(i\) oraz \(j\),
-        \item każdemu cyklowi jednoelementowemu postaci \((i)\) przypisujemy przewód biegnący od \(i\)--tego wejścia do \(i\)--tego wyjścia sieci.
+        \item każdemu cyklowi jednoelementowemu postaci \((i)\) przypisujemy przewód biegnący od \(i\)-tego wejścia do \(i\)-tego wyjścia sieci.
     \end{itemize}
     Oczywiście w ten sposób używamy co najwyżej \(\floor{\frac{n}{2}}\) przełączników. 
     Ponadto jeśli wszystkie przełączniki są w stanie nieaktywnym, sieć realizuje \(\id n\), natomiast jeśli wszystkie są w stanie aktywnym, to realizuje \(\sym n k\).
@@ -837,11 +831,11 @@ Ustalmy \(n\). Rekurencyjne konstruujemy dwie identyczne sieci realizujące wszy
 
 \vspace{.5em}
 
-Tworzymy warstwę wejściową przewodników. Przewody z \(n\) wejść sieci kierujemy do \(n/2\) przewodników w taki sposób, że do \(k\)--tego przełącznika trafiają przewody z wyjść \(2k\) (na wejście 0) oraz \(2k+1\) (na wejście 1) dla \(k = 0, 1, \ldots, n/2 - 1\). Natomiast z przewody z wyjścia 0 i 1 \(k\)--tego przewodnika kierujemy do \(k\)--tego wejścia odpowiednio białej i czarnej podsieci. 
+Tworzymy warstwę wejściową przewodników. Przewody z \(n\) wejść sieci kierujemy do \(n/2\) przewodników w taki sposób, że do \(k\)-tego przełącznika trafiają przewody z wyjść \(2k\) (na wejście 0) oraz \(2k+1\) (na wejście 1) dla \(k = 0, 1, \ldots, n/2 - 1\). Natomiast z przewody z wyjścia 0 i 1 \(k\)-tego przewodnika kierujemy do \(k\)-tego wejścia odpowiednio białej i czarnej podsieci. 
 
 \vspace{.5em}
 
-Analogicznie tworzymy warstwę wyjściową przełączników. Dokładniej kładziemy \(n/2\) przełączników tak, że przewody z wyjścia 0 i 1 \(k\)--tego przewodnika prowadzą odpowiednio do wyjść sieci o numerach \(2k\) i \(2k+1\). Natomiast do wejść 0 i 1 \(k\)--tego przewodnika prowadzimy przewód z \(k\)--tego wyjścia odpowiednio białej i czarnej podsieci. 
+Analogicznie tworzymy warstwę wyjściową przełączników. Dokładniej kładziemy \(n/2\) przełączników tak, że przewody z wyjścia 0 i 1 \(k\)-tego przewodnika prowadzą odpowiednio do wyjść sieci o numerach \(2k\) i \(2k+1\). Natomiast do wejść 0 i 1 \(k\)-tego przewodnika prowadzimy przewód z \(k\)-tego wyjścia odpowiednio białej i czarnej podsieci. 
 
 \vspace{.5em}
 
@@ -940,23 +934,23 @@ Przeprowadzimy dowód przez indukcję, korzystając z rekurencyjnej struktury si
         \item Podstawa indukcji dla $n = 1$ oraz $n = 2$. \\
         Dla $n = 1$ sieć Beneša--Waksmana jest prostu przewodem. Z kolei dla $n = 2$ jest to pojedynczy przełącznik.
 
-        \item Krok indukcyjny. Weźmy dowolne $n = 2^k$ dla pewnego $k$ naturalnego i załóżmy, że sieć dla \(n/2\) konstruowana w sposób opisany powyżej realizuje wszystkie permutacje $n/2$--elementowe. 
+        \item Krok indukcyjny. Weźmy dowolne $n = 2^k$ dla pewnego $k$ naturalnego i załóżmy, że sieć dla \(n/2\) konstruowana w sposób opisany powyżej realizuje wszystkie permutacje $n/2$-elementowe. 
         Ustalmy \(\pi \in S_n\).
         
-        Zauważmy, że wystarczy wskazać podział zbioru \(\{0, 1, \ldots, n-1\}\) na dwa podzbiory \(n/2\)--elementowe (nazwijmy je \emph{białym} i \emph{czarnym}) o następującej własności: dla dowolnego \(k = 0, 1, \ldots, n/2 - 1\) liczby \(2k\) i \(2k+1\) należą do różnych zbiorów podziału oraz analogicznie liczby \(\pi(2k)\) i \(\pi(2k+1)\) należą do różnych zbiorów podziału.
+        Zauważmy, że wystarczy wskazać podział zbioru \(\{0, 1, \ldots, n-1\}\) na dwa podzbiory \(n/2\)-elementowe (nazwijmy je \emph{białym} i \emph{czarnym}) o następującej własności: dla dowolnego \(k = 0, 1, \ldots, n/2 - 1\) liczby \(2k\) i \(2k+1\) należą do różnych zbiorów podziału oraz analogicznie liczby \(\pi(2k)\) i \(\pi(2k+1)\) należą do różnych zbiorów podziału.
 
         \vspace{.5em}
 
         Istotnie -- zakładając, że istnieje taki podział, ustawienie przełączników realizujące \(\pi\) wygląda następująco: 
 
         \begin{itemize}
-            \item jeśli \(2k\) jest w białym zbiorze, a \(2k+1\) w czarnym, to \(k\)--temu przełącznikowi z warstwy wejściowej nadajemy stan nieaktywny,
-            \item w przeciwnym przypadku \(k\)--temu przełącznikowi z warstwy wyjściowej nadajemy stan aktywny.  
+            \item jeśli \(2k\) jest w białym zbiorze, a \(2k+1\) w czarnym, to \(k\)-temu przełącznikowi z warstwy wejściowej nadajemy stan nieaktywny,
+            \item w przeciwnym przypadku \(k\)-temu przełącznikowi z warstwy wyjściowej nadajemy stan aktywny
         \end{itemize}
-        dla \(k = 0, 1, \ldots, n/2-1\). Analogicznie nadajemy stan \(k\)--temu przełącznikowi na wyjściu:
+        dla \(k = 0, 1, \ldots, n/2-1\). Analogicznie nadajemy stan \(k\)-temu przełącznikowi na wyjściu:
         \begin{itemize}
-            \item jeśli \(\pi(2k)\) jest w białym zbiorze, a \(\pi(2k+1)\) w czarnym, to \(k\)--temu przełącznikowi nadajemy stan nieaktywny,
-            \item w przeciwnym przypadku \(k\)--temu przełącznikowi nadajemy stan aktywny.  
+            \item jeśli \(\pi(2k)\) jest w białym zbiorze, a \(\pi(2k+1)\) w czarnym, to \(k\)-temu przełącznikowi nadajemy stan nieaktywny,
+            \item w przeciwnym przypadku \(k\)-temu przełącznikowi nadajemy stan aktywny.  
         \end{itemize}
 
         Natomiast o właściwe ustawienie liczb wewnątrz \emph{białego} i \emph{czarnego} zbioru ,,zadbają'' rekurencyjnie skonstruowane sieci.
@@ -968,10 +962,10 @@ Przeprowadzimy dowód przez indukcję, korzystając z rekurencyjnej struktury si
         \vspace{.1em}
         
         % Niech $V = V_i \cup V_m $ będzie zbiorem wierzchołków.
-        Niech \(V_i = \{ 0, 1, \ldots, n-1 \}\) będzie zbiorem wierzchołków odpowiadających portom wejściowym sieci (\(j\)--ty port wejściowy  utożsamiamy z wierzchołkiem \(j\)). Łączymy ze sobą wierzchołki, które odpowiadają wejściom tego samego przełącznika z warstwy wejściowej. Dokładniej łączymy krawędzią  wierzchołki $0$ i $1$, $2$ i $3$, ... , $n-2$ i $n-1$. 
+        Niech \(V_i = \{ 0, 1, \ldots, n-1 \}\) będzie zbiorem wierzchołków odpowiadających portom wejściowym sieci (\(j\)-ty port wejściowy  utożsamiamy z wierzchołkiem \(j\)). Łączymy ze sobą wierzchołki, które odpowiadają wejściom tego samego przełącznika z warstwy wejściowej. Dokładniej łączymy krawędzią  wierzchołki $0$ i $1$, $2$ i $3$, ... , $n-2$ i $n-1$. 
 
         \vspace{.1em}
-        Niech $V_o = \{0', 1', \ldots, (n-1)'\}$ będzie zbiorem wierzchołków, które odpowiadają portom wyjściowym sieci (\(j\)--ty port wyjściowy utożsamiamy z \(k'\), takim że \(\pi(j) = k\)). Łączymy krawędzią te, które są ze sobą w jednym przełączniku w warstwie wyjściowej (czyli \(\pi(2j)'\) oraz \(\pi(2j+1)'\) dla \(j = 0, 1, \ldots, n/2 - 1\)). 
+        Niech $V_o = \{0', 1', \ldots, (n-1)'\}$ będzie zbiorem wierzchołków, które odpowiadają portom wyjściowym sieci (\(j\)-ty port wyjściowy utożsamiamy z \(k'\), takim że \(\pi(j) = k\)). Łączymy krawędzią te, które są ze sobą w jednym przełączniku w warstwie wyjściowej (czyli \(\pi(2j)'\) oraz \(\pi(2j+1)'\) dla \(j = 0, 1, \ldots, n/2 - 1\)). 
 
         
         Ponadto łączymy krawędzią wierzchołki o etykietach $j$ oraz $j'$.
@@ -1387,7 +1381,7 @@ Skonstruujmy sieć w następujący sposób: złóżmy ze sobą sieci realizując
 
 \vspace{.5em}
 
-Ustalmy teraz \(j \in \lt\{ 0, 1, \ldots, n-1 \rt\}\). Aby zrealizować \(\shift n j\) należy aktywować sieci realizujące \(\shift n {2^l}\), takie że na \(l\)--tej pozycji w zapisie binarnym \(j\) występuje jedynka. Z  faktu \ref{fa:zlozenie_shift} wynika, że w ten sposób zrealizujemy \(\shift n j\). 
+Ustalmy teraz \(j \in \lt\{ 0, 1, \ldots, n-1 \rt\}\). Aby zrealizować \(\shift n j\), należy aktywować sieci realizujące \(\shift n {2^l}\), takie że na \(l\)-tej pozycji w zapisie binarnym \(j\) występuje jedynka. Z  faktu \ref{fa:zlozenie_shift} wynika, że w ten sposób zrealizujemy \(\shift n j\). 
 
 \subsection{Rozmiar i głębokość}
 
