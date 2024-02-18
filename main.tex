@@ -71,7 +71,7 @@ Instytut Matematyczny}\\
 \hspace*{6.5cm}dr. hab. Jana Dymary, prof. UWr }\\
 \vfill
 \begin{center}
-{\large Wrocław, \the\year{} r.}\\
+{\large Wrocław, 2024 r.}\\
 \end{center}
 
 % -------------- abstrakt ----------------------
@@ -400,7 +400,7 @@ Ponadto wejścia i wyjścia sieci numerujemy liczbami od \(0\) do \(n-1\).
 
 
 \begin{df}
-    Mówimy, że sieć przełączników o \(n\) wejściach i \(n\) wyjściach realizuje permutację \(\sigma \in S_n\), gdy każdemu przewodnikowi możemy nadać stan (aktywny lub nieaktywny) tak, by dla sygnałów w kolejności \(0, 1, \ldots, n-1\) na wejściu otrzymać sygnały w kolejności \(\sigma (0), \sigma (1), \ldots, \sigma (n-1)\) na wyjściu. 
+    Mówimy, że sieć przełączników o \(n\) wejściach i \(n\) wyjściach realizuje permutację \(\sigma \in S_n\), gdy każdemu przewodnikowi możemy nadać stan (aktywny lub nieaktywny) tak, by dla sygnałów w kolejności \(0, 1, \ldots, n-1\) na wejściu otrzymać sygnały w kolejności \(\sigma (0), \,\, \sigma (1), \,\, \ldots, \,\, \sigma (n-1)\) na wyjściu. 
 \end{df}
 
 Poniższa sieć wraz z przedstawionymi stanami przełączników realizuje permutację
@@ -935,10 +935,10 @@ Przeprowadzimy dowód przez indukcję, korzystając z rekurencyjnej struktury si
             \item jeśli \(2k\) jest w białym zbiorze, a \(2k+1\) w czarnym, to \(k\)-temu przełącznikowi z warstwy wejściowej nadajemy stan nieaktywny,
             \item w przeciwnym przypadku \(k\)-temu przełącznikowi z warstwy wyjściowej nadajemy stan aktywny
         \end{itemize}
-        dla \(k = 0, 1, \ldots, n/2-1\). Analogicznie nadajemy stan \(k\)-temu przełącznikowi na wyjściu:
+        dla \(k = 0, 1, \ldots, n/2-1\). W odwrotny sposób nadajemy stan \(k\)-temu przełącznikowi na wyjściu:
         \begin{itemize}
-            \item jeśli \(\pi(2k)\) jest w białym zbiorze, a \(\pi(2k+1)\) w czarnym, to \(k\)-temu przełącznikowi nadajemy stan nieaktywny,
-            \item w przeciwnym przypadku \(k\)-temu przełącznikowi nadajemy stan aktywny.  
+            \item jeśli \(\pi(2k)\) jest w białym zbiorze, a \(\pi(2k+1)\) w czarnym, to \(k\)-temu przełącznikowi nadajemy stan aktywny,
+            \item w przeciwnym przypadku \(k\)-temu przełącznikowi nadajemy stan nieaktywny.  
         \end{itemize}
 
         Natomiast o właściwe ustawienie liczb wewnątrz \emph{białego} i \emph{czarnego} zbioru ,,zadbają'' rekurencyjnie skonstruowane sieci.
@@ -1373,7 +1373,7 @@ Ustalmy teraz \(j \in \lt\{ 0, 1, \ldots, n-1 \rt\}\). Aby zrealizować \(\shift
 
 \subsection{Rozmiar i głębokość}
 
-Zauważmy, że stwarzamy \(\Theta(\log n)\) podsieci, a każda z nich ma rozmiar  \(\floor{\frac n 2}\) i głębokość 1. Wobec tego rozmiar skonstruowanej sieci wynosi \(\Theta(n \log n)\), a głębokość \(\Theta(\log n)\).
+Zauważmy, że stwarzamy \(\Theta(\log n)\) podsieci, a każda z nich ma rozmiar równy co najwyżej \(\floor{\frac n 2}\) i głębokość równą 1. Wobec tego rozmiar skonstruowanej sieci wynosi \(O(n \log n)\), a głębokość \(O(\log n)\).
 
 % -- Sieć realizująca przesunięcia cykliczne o potęgi 2 ---
 
